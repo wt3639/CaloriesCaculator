@@ -6,17 +6,25 @@ var need
 var prot
 var fat
 var cab
+var height
+var weight
+var BMI
+var heightTemp
+var weightTemp
 var userInfo= {}
 Page({
   data: {
   // text:"这是一个页面" 
-  BMI: '',
+  BMR: '',
   total: '',
   need:'',
   prot:'',
   fat:'',
   cab:'',
   userInfo: {},
+  height:'',
+  weight:'',
+  BMI:'',
 }, 
 
 onLoad: function(options) {
@@ -36,27 +44,34 @@ onLoad: function(options) {
     case '4': si = 1.9;break
   }
    total = parseInt(basic * si + parseInt(options.aerobic));
+   BMI = parseInt(options.weight) / (parseInt(options.height) * parseInt(options.height))*10000;
+   BMI = BMI.toFixed(1);
   if (options.goal=="muscle") {
      need = (total + parseInt(options.energy));
      prot = parseInt(2.2 * parseInt(options.weight));
-     fat = parseInt(need * 0.25 / 8);
-     cab = parseInt((need - prot * 4 - fat * 8) / 4);
+     fat = parseInt(need * 0.25 / 9);
+     cab = parseInt((need - prot * 4 - fat * 9) / 4);
   } else {
      need = (total - parseInt(options.energy));
      prot = parseInt(2.75 * parseInt(options.weight));
-     fat = parseInt(need * 0.2 / 8);
-     cab = parseInt((need - prot * 4 - fat * 8) / 4);
+     fat = parseInt(need * 0.2 / 9);
+     cab = parseInt((need - prot * 4 - fat * 9) / 4);
   } 
+  height = options.height;
+  weight = options.weight;
+  heightTemp = height;
+  weightTemp = weight;  
 
-  
-                 
   this.setData({
-    BMI: basic,
+    BMR: basic,
     total:total,
     need:need,
     prot:prot,
     fat:fat,
     cab:cab,
+    height:height,
+    weight:weight,
+    BMI:BMI,
   })
 
   if (app.globalData.userInfo) {
@@ -79,6 +94,26 @@ onLoad: function(options) {
     }
   }
 },
+hidePrivate: function (e) {
+  console.log('switch1 发生 change 事件，携带值为', e.detail.value)
+  if(e.detail.value==true){
+    height = '*';
+    weight = '*';
+    this.setData({
+      height:'*',
+      weight:'*',
+    })
+  }else{
+    height = heightTemp;
+    weight = weightTemp;
+    this.setData({
+      height: height,
+      weight: weight,
+    })
+  }
+
+},
+
 onShareAppMessage: function (res) {
   if (res.from === 'button') {
     // 来自页面内转发按钮
@@ -87,7 +122,7 @@ onShareAppMessage: function (res) {
   return {
     title: '我的热量摄入表',
     path: '/pages/forward/forward?basic=' + basic + '&total=' + total + '&need=' + need + '&prot=' + prot + '&fat=' + fat
-    + '&cab=' + cab + '&nickName=' + userInfo.nickName + '&avatarUrl=' + userInfo.avatarUrl,
+    + '&cab=' + cab + '&BMI=' + BMI + '&height=' + height + '&weight=' + weight + '&nickName=' + userInfo.nickName + '&avatarUrl=' + userInfo.avatarUrl,
     success: function (res) {
       // 转发成功
     },

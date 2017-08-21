@@ -3,7 +3,7 @@ const app = getApp()
 Page({
   data: {
     // text:"这是一个页面" 
-    BMI: '',
+    BMR: '',
     total: '',
     need: '',
     prot: '',
@@ -11,13 +11,16 @@ Page({
     cab: '',
     nickName:'',
     avatarUrl:'',
+    BMI:'',
+    height:'',
+    weight:'',
   },
 
   onLoad: function (options) {
 
 
     this.setData({
-      BMI: options.basic,
+      BMR: options.basic,
       total: options.total,
       need: options.need,
       prot: options.prot,
@@ -25,6 +28,9 @@ Page({
       cab: options.cab,
       nickName: options.nickName,
       avatarUrl: options.avatarUrl,
+      BMI:options.BMI,
+      height:options.height,
+      weight:options.weight,
     })
 
     if (app.globalData.userInfo) {
@@ -43,6 +49,12 @@ Page({
       }
     }
   },
+
+getMy: function (e){
+  wx.navigateTo({
+    url: '../index/index'
+  })
+}
 
 })
 

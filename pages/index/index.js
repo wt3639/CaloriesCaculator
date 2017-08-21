@@ -34,7 +34,13 @@ Page({
     goals: [
       { name: 'muscle', value: '增肌', checked: 'true' },
       { name: 'fat', value: '减脂' },
-    ]
+    ],
+    height:'',
+    weight:'',
+    age:'',
+    goal:'',
+    aerobic:'',
+    energy:'',
   },
 
   bindHelp: function () {
@@ -104,6 +110,10 @@ Page({
         duration: 2000
       })
     } else {
+      var objData = e.detail.value;
+        // 同步方式存储表单数据
+      wx.setStorageSync('info',objData)
+
       wx.navigateTo({
         url: '../result/result?height=' + e.detail.value.height + '&weight=' + e.detail.value.weight + '&age=' + e.detail.value.age + '&aerobic=' + e.detail.value.aerobic + '&energy=' + e.detail.value.energy
         + '&sex=' + e.detail.value.sex + '&goal=' + e.detail.value.goal + "&sportIndex=" + e.detail.value.sportIndex
@@ -117,6 +127,37 @@ Page({
   },
 
   onLoad: function () {
+    try {
+      var info = wx.getStorageSync('info')
+      if (info) {
+       this.setData({
+         height:info.height,
+         weight:info.weight,
+         age:info.age,
+         index:info.sportIndex,
+         aerobic:info.aerobic,
+         energy:info.energy,
+         })
+         if(info.sex=='female'){
+           this.setData({
+             sex: [
+               { name: 'male', value: '男'  },
+               { name: 'female', value: '女', checked: 'true'},
+             ],
+           })
+         }
+         if(info.goal=='fat'){
+           this.setData({ goals: [
+             { name: 'muscle', value: '增肌' },
+             { name: 'fat', value: '减脂', checked: 'true' },
+           ],
+           })
+         }
+      }
+    } catch (e) {
+      // Do something when catch error
+    }
+    
     console.log('onLoad')
   }
 })

@@ -1,32 +1,36 @@
 <!--index.wxml-->
 <view class="mainView">
-  <view class="userinfo">
-
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-
+  <view class="upHalf" style="flex-direction:row">
+    <view class="userinfo">
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </view>
+    <view class="basicInfo">
+      <view class="height">身高: {{height}}cm</view>
+      <view class="weight">体重: {{weight}}kg</view>
+       <view class="BMI">BMI: {{BMI}}</view>
+    </view>
   </view>
-  <view class="energyInfo">
+  <view class="downHalf" style="flex-direction:row">
+    <view class="item">
+      <view class="number"><text decode='ture'>&emsp;基础代谢率为:</text></view>
+      <view class="number2"><text decode='ture'>&emsp;每日消耗热量为：</text></view>
+      <view class="number"><text decode='ture'>&emsp;每日摄入热量：</text></view>
+      <view class="number2"><text decode='ture'>&emsp;每日摄入蛋白质：</text></view>
+      <view class="number"><text decode='ture'>&emsp;每日摄入脂肪：</text></view>
+      <view class="number2"><text decode='ture'>&emsp;每日摄入碳水：</text></view>
+    </view>
 
-    <view>您的基础代谢率为:</view>
-    <view class="number">{{BMI}}kcal</view>
-  </view>
-  <view class="energyInfo">
-    <view>每日消耗热量为：</view>
-    <view class="number">{{total}}kcal</view>
-  </view>
-  <view class="energyInfo">
-    <view>建议每日摄入热量：</view>
-    <view class="number">{{need}}kcal</view>
-  </view>
-
-  <view>
-    <view class="energyInfo">每日摄入基本营养物质：</view>
-    <view class="nutri">
-      <text decode='true' class="text">蛋白质：{{prot}}g</text>
-      <text decode='true' class="text">&emsp;脂肪：{{fat}}g </text>
-      <text decode='true' class="text">&emsp;碳水：{{cab}}g</text>
+    <view class="digit">
+      <view class="number">{{BMR}}kcal</view>
+      <view class="number2">{{total}}kcal</view>
+      <view class="number">{{need}}kcal</view>
+      <view class="number2">{{prot}}g</view>
+      <view class="number">{{fat}}g</view>
+      <view class="number2">{{cab}}g</view>
     </view>
 
   </view>
+   <switch class="switch" type='checkbox' bindchange="hidePrivate"/>分享时隐藏身高体重数据
+  <button class='button'open-type="share" type="primary">分享给好友</button>
 </view>
