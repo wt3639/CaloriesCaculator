@@ -1,0 +1,32 @@
+<!--index.wxml-->
+<view class="mainView">
+  <view class="userinfo">
+
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+
+  </view>
+  <view class="energyInfo">
+
+    <view>您的基础代谢率为:</view>
+    <view class="number">{{BMI}}kcal</view>
+  </view>
+  <view class="energyInfo">
+    <view>每日消耗热量为：</view>
+    <view class="number">{{total}}kcal</view>
+  </view>
+  <view class="energyInfo">
+    <view>建议每日摄入热量：</view>
+    <view class="number">{{need}}kcal</view>
+  </view>
+
+  <view>
+    <view class="energyInfo">每日摄入基本营养物质：</view>
+    <view class="nutri">
+      <text decode='true' class="text">蛋白质：{{prot}}g</text>
+      <text decode='true' class="text">&emsp;脂肪：{{fat}}g </text>
+      <text decode='true' class="text">&emsp;碳水：{{cab}}g</text>
+    </view>
+
+  </view>
+</view>

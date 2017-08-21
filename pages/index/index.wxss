@@ -1,0 +1,68 @@
+/**index.wxss**/
+.mainView{
+  margin:10px 10px 10px 10px;
+}
+.input{
+ 
+  width: 80px;
+  background: whitesmoke;
+  height: 40px;
+  font-size: 15px;
+}
+.inputlong{
+ 
+  background: whitesmoke;
+  height: 40px;
+  font-size: 15px;
+}
+.picker{
+  font-size: 15px;
+   background: whitesmoke;
+   height: 40px;
+  
+}
+.icon{
+  height: 17px;
+  width: 17px;
+  margin-left: 5px;
+}
+
+.textView{
+  height: 40px;
+  line-height: 40px;
+}
+
+.radioView{
+  height: 40px;
+  line-height: 40px;
+   background: whitesmoke;
+}
+.explain{
+  font-size: 15px;
+}
+
+.cost{
+  height: 80px;
+  line-height: 40px;
+   
+}
+.three{
+  display: flex;
+  height: 80px;
+  line-height: 40px;
+}
+.weight{
+  margin-left: 40px;
+  
+}
+.sportView{
+  height: 80px;
+  line-height: 40px;
+}
+.age{
+ margin-left: 40px;
+ 
+}
+.button{
+  margin-top: 5px;
+}
