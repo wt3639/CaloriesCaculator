@@ -26,6 +26,7 @@ page{
   height: 80rpx;
   font-size: 40rpx;
     text-align: center;
+    margin-bottom: 20rpx;
 }
 .picker{
   font-size: 40rpx;
@@ -35,6 +36,7 @@ page{
   border-radius: 40rpx;
    height: 80rpx;
     text-align: center;
+    
   
 }
 .icon{
@@ -47,7 +49,13 @@ page{
   height: 80rpx;
   line-height: 80rpx;
 }
-
+.miniTitle{
+  display: flex;
+}
+.image{
+  height: 80rpx;
+  line-height: 90rpx
+}
 .radioView{
   height: 80rpx;
   line-height: 80rpx;
@@ -59,6 +67,7 @@ page{
     font-size: 40rpx;
     
 }
+
 .explain{
   font-size: 30rpx;
 }
@@ -80,6 +89,7 @@ page{
 .sportView{
   height: 160rpx;
   line-height: 80rpx;
+  margin-bottom: 10rpx;
 }
 .age{
  margin-left: 80rpx;
