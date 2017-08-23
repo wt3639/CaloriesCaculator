@@ -12,7 +12,7 @@ page{
 
 .upHalf{
   display: flex;
-  margin-top: 100rpx;
+  margin-top: 60rpx;
 }
 
 .basicInfo{
@@ -54,7 +54,7 @@ page{
 }
 
 .button{
- margin-top: 60rpx;
+ margin-top: 40rpx;
   margin-left: 60rpx;
   margin-right: 60rpx;
 }

@@ -117,6 +117,31 @@ onLoad: function(options) {
     context.fill()
     context.draw()
 
+  }else{
+    app.drawReadyCallback = function() {
+      var context = wx.createCanvasContext('firstCanvas')
+      context.setFillStyle("#22ade6")
+      context.fillRect(app.rpxTopx(10), app.rpxTopx(40), app.rpxTopx(160), app.rpxTopx(20))
+      context.setFillStyle("#39b545")
+      context.fillRect(app.rpxTopx(170), app.rpxTopx(40), app.rpxTopx(160), app.rpxTopx(20))
+      context.setFillStyle("#ffaa42")
+      context.fillRect(app.rpxTopx(330), app.rpxTopx(40), app.rpxTopx(160), app.rpxTopx(20))
+      context.setFillStyle("#ee5d26")
+      context.fillRect(app.rpxTopx(490), app.rpxTopx(40), app.rpxTopx(160), app.rpxTopx(20))
+      context.setFillStyle("#000000")
+      context.setFontSize(12);
+      context.fillText('18.5', app.rpxTopx(140), app.rpxTopx(80))
+      context.fillText('24', app.rpxTopx(310), app.rpxTopx(80))
+      context.fillText('27', app.rpxTopx(470), app.rpxTopx(80))
+      context.fillText('偏瘦', app.rpxTopx(70), app.rpxTopx(100))
+      context.fillText('标准', app.rpxTopx(230), app.rpxTopx(100))
+      context.fillText('超重', app.rpxTopx(390), app.rpxTopx(100))
+      context.fillText('肥胖', app.rpxTopx(550), app.rpxTopx(100))
+      context.setFillStyle('#ffffff')
+      context.arc(app.rpxTopx(app.bmiToX(BMI)), app.rpxTopx(50), app.rpxTopx(10), 0, 2 * Math.PI)
+      context.fill()
+      context.draw()
+    }
   }
   
 },

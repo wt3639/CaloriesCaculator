@@ -48,19 +48,22 @@ App({
         }
       }
     })
-    
+
+    wx.getSystemInfo({
+      success: function (res) {
+        this.globalData.sysinfo = res;
+        var width = sysinfo.windowWidth;
+        this.globalData.px2rpx = 750 / width;
+        this.globalData.rpx2px = width / 750;
+        if (this.drawReadyCallback) {
+          this.drawReadyCallback()
+        }
+      }
+    })
   },
 
   rpxTopx: function(rpx){
-    var sysinfo = wx.getSystemInfoSync();
-    if (sysinfo) {
-      this.globalData.sysinfo = sysinfo;
-      var width = sysinfo.windowWidth;
-      this.globalData.px2rpx = 750 / width;
-      this.globalData.rpx2px = width / 750;
-      return rpx * width / 750;
-    }  
-      
+      return rpx * this.globalData.rpx2px;
   },
 
   bmiToX: function (BMITemp) {
