@@ -1,7 +1,7 @@
 //app.js
 App({
-  onLaunch: function() {
- 
+  onLaunch: function () {
+
     // 登录
     wx.login({
       success: res => {
@@ -26,11 +26,11 @@ App({
             }
           })
         }
-        
-        else{
+
+        else {
           wx.authorize({
             scope: 'scope.userInfo',
-            success:res => {
+            success: res => {
               wx.getUserInfo({
                 success: res => {
                   // 可以将 res 发送给后台解码出 unionId
@@ -48,24 +48,16 @@ App({
         }
       }
     })
+    var res = wx.getSystemInfoSync();
+    this.globalData.sysInfo = res;
+    var width = res.windowWidth;
+    this.globalData.rpx2px = width / 750;
 
-    wx.getSystemInfo({
-      success: function (res) {
-        this.globalData.sysinfo = res;
-        var width = sysinfo.windowWidth;
-        this.globalData.px2rpx = 750 / width;
-        this.globalData.rpx2px = width / 750;
-        if (this.drawReadyCallback) {
-          this.drawReadyCallback()
-        }
-      }
-    })
   },
 
-  rpxTopx: function(rpx){
-      return rpx * this.globalData.rpx2px;
+  rpxTopx: function (rpx) {
+    return rpx * this.globalData.rpx2px;
   },
-
   bmiToX: function (BMITemp) {
     var bmi = parseFloat(BMITemp);
     if (bmi < 18.5) {
@@ -86,9 +78,10 @@ App({
     return x;
   },
 
+
   globalData: {
     userInfo: null,
-    px2rpx:null,
-    rpx2px:null,
+    sysInfo: null,
+    rpx2px: null,
   }
 })
