@@ -8,9 +8,10 @@
     <view class="basicInfo">
       <view class="height">身高: {{height}}cm</view>
       <view class="weight">体重: {{weight}}kg</view>
-       <view class="BMI">BMI: {{BMI}}</view>
+      <view class="BMI">BMI: {{BMI}}</view>
     </view>
   </view>
+  <canvas  canvas-id="firstCanvas"></canvas>
   <view class="downHalf" style="flex-direction:row">
     <view class="item">
       <view class="number"><text decode='ture'>&emsp;基础代谢率为:</text></view>
@@ -31,6 +32,6 @@
     </view>
 
   </view>
-   <switch class="switch" type='checkbox' bindchange="hidePrivate"/>分享时隐藏身高体重数据
-  <button class='button'open-type="share" type="primary">分享给好友</button>
+  <switch class="switch" type='checkbox' bindchange="hidePrivate" />分享时隐藏身高体重数据
+  <button class='button' open-type="share" type="primary">分享给好友</button>
 </view>

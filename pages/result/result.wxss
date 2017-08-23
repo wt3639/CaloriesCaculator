@@ -10,7 +10,7 @@ page {
 
 .upHalf {
   display: flex;
-  margin-top: 100rpx;
+  margin-top: 60rpx;
 }
 
 .basicInfo {
@@ -40,7 +40,6 @@ page {
 
 .downHalf {
   margin-left: 65rpx;
-  margin-top: 100rpx;
   display: flex;
 }
 
@@ -54,7 +53,7 @@ page {
 }
 
 .button {
-  margin-top: 60rpx;
+  margin-top: 40rpx;
   margin-left: 60rpx;
   margin-right: 60rpx;
 }
@@ -77,4 +76,11 @@ page {
 .switch {
   margin-top: 20rpx;
   margin-left: 60rpx;
+}
+
+canvas{
+  
+  height: 140rpx;
+  width: 670rpx;
+  margin-left: 45rpx;
 }

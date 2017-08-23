@@ -38,7 +38,6 @@ Page({
     height:'',
     weight:'',
     age:'',
-    goal:'',
     aerobic:'',
     energy:'',
   },

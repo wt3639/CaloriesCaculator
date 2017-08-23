@@ -11,6 +11,7 @@
        <view class="BMI">BMI: {{BMI}}</view>
     </view>
   </view>
+    <canvas  canvas-id="secondCanvas"></canvas>
   <view class="downHalf" style="flex-direction:row">
     <view class="item">
       <view class="number"><text decode='ture'>&emsp;基础代谢率为:</text></view>

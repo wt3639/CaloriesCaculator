@@ -43,7 +43,6 @@ page{
 
 .downHalf{
   margin-left: 65rpx;
-  margin-top: 100rpx;
   display: flex;
 }
 .item{
@@ -71,4 +70,11 @@ page{
   height: 80rpx;
   line-height: 80rpx;
   background: #bdd7ee;
+}
+
+canvas{
+  
+  height: 140rpx;
+  width: 670rpx;
+  margin-left: 45rpx;
 }

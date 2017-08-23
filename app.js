@@ -1,10 +1,7 @@
 //app.js
 App({
   onLaunch: function() {
-    //调用API从本地缓存中获取数据
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+ 
     // 登录
     wx.login({
       success: res => {
@@ -51,11 +48,44 @@ App({
         }
       }
     })
+    
   },
 
- 
+  rpxTopx: function(rpx){
+    var sysinfo = wx.getSystemInfoSync();
+    if (sysinfo) {
+      this.globalData.sysinfo = sysinfo;
+      var width = sysinfo.windowWidth;
+      this.globalData.px2rpx = 750 / width;
+      this.globalData.rpx2px = width / 750;
+      return rpx * width / 750;
+    }  
+      
+  },
+
+  bmiToX: function (BMITemp) {
+    var bmi = parseFloat(BMITemp);
+    if (bmi < 18.5) {
+      var x = 10 + 160 / 18.5 * bmi
+    }
+    if (bmi >= 18.5 && bmi < 24) {
+      var x = 170 + 160 / 5.5 * (bmi - 18.5)
+    }
+    if (bmi >= 24 && bmi < 27) {
+      var x = 330 + 160 / 3 * (bmi - 24)
+    }
+    if (bmi >= 27) {
+      var x = 490 + 160 / 13 * (bmi - 27)
+    }
+    if (bmi >= 40) {
+      var x = 650
+    }
+    return x;
+  },
 
   globalData: {
-    userInfo: null
+    userInfo: null,
+    px2rpx:null,
+    rpx2px:null,
   }
 })
