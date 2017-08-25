@@ -14,8 +14,8 @@
   <canvas  canvas-id="firstCanvas"></canvas>
   <view class="downHalf" style="flex-direction:row">
     <view class="item">
-      <view class="number"><text decode='ture'>&emsp;基础代谢率为:</text></view>
-      <view class="number2"><text decode='ture'>&emsp;每日消耗热量为：</text></view>
+      <view class="number"><text decode='ture'>&emsp;基础代谢率:</text></view>
+      <view class="number2"><text decode='ture'>&emsp;每日消耗热量：</text></view>
       <view class="number"><text decode='ture'>&emsp;每日摄入热量：</text></view>
       <view class="number2"><text decode='ture'>&emsp;每日摄入蛋白质：</text></view>
       <view class="number"><text decode='ture'>&emsp;每日摄入脂肪：</text></view>

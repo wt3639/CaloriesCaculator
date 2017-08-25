@@ -1,5 +1,6 @@
 //result.js
 const app = getApp()
+var util = require("../util/util.js")
 var basic = null
 var total = null
 var need = null
@@ -113,7 +114,7 @@ Page({
     context.fillText('超重', app.rpxTopx(390), app.rpxTopx(100))
     context.fillText('肥胖', app.rpxTopx(550), app.rpxTopx(100))
     context.setFillStyle('#ffffff')
-    context.arc(app.rpxTopx(app.bmiToX(BMI)), app.rpxTopx(50), app.rpxTopx(10), 0, 2 * Math.PI)
+    context.arc(app.rpxTopx(util.bmiToX(BMI)), app.rpxTopx(50), app.rpxTopx(10), 0, 2 * Math.PI)
     context.fill()
     context.draw()
 

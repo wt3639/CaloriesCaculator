@@ -71,7 +71,7 @@ Page({
     context.fillText('超重', this.rpxTopx(390), this.rpxTopx(100))
     context.fillText('肥胖', this.rpxTopx(550), this.rpxTopx(100))
     context.setFillStyle('#ffffff')
-    context.arc(this.rpxTopx(this.bmiToX(options.BMI)), this.rpxTopx(50), this.rpxTopx(10), 0, 2 * Math.PI)
+    context.arc(this.rpxTopx(util.bmiToX(options.BMI)), this.rpxTopx(50), this.rpxTopx(10), 0, 2 * Math.PI)
     context.fill()
     context.draw()
   },
