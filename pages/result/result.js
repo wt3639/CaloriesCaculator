@@ -29,6 +29,23 @@ Page({
   },
 
   onLoad: function (options) {
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+      })
+      userInfo = app.globalData.userInfo;
+      console.log(userInfo);
+    } else {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+        })
+        userInfo = res.userInfo;
+        console.log(userInfo);
+      }
+    }
     // 页面初始化 options为页面跳转所带来的参数 
     var si
     if (options.sex == 'male') {
@@ -75,25 +92,7 @@ Page({
       BMI: BMI,
     })
 
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-
-      })
-      userInfo = app.globalData.userInfo;
-      console.log(userInfo);
-    } else {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-
-        })
-        userInfo = res.userInfo;
-        console.log(userInfo);
-      }
-    }
+    
      
     var context = wx.createCanvasContext('firstCanvas')
     context.setFillStyle("#22ade6")

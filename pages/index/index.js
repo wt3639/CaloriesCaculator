@@ -40,6 +40,7 @@ Page({
     age:'',
     aerobic:'',
     energy:'',
+    hasUserInfo: false,
   },
 
   bindHelp: function () {
@@ -109,13 +110,36 @@ Page({
         duration: 2000
       })
     } else {
+      var si;
+      switch (e.detail.value.sportIndex) {
+        case '0': si = 1.2; break
+        case '1': si = 1.375; break
+        case '2': si = 1.55; break
+        case '3': si = 1.725; break
+        case '4': si = 1.9; break
+      }
+      wx.request({
+        url: 'https://www.tomwoo.tk/CounterWebApp/calory/getjson?height=' + e.detail.value.height + '&weight=' + e.detail.value.weight + '&age=' + e.detail.value.age + '&aerobic=' + e.detail.value.aerobic + '&energy=' + e.detail.value.energy
+        + '&Sex=' + e.detail.value.sex + '&Goal=' + e.detail.value.goal + "&sportIndex=" + si,
+        data: {
+          x: '',
+          y: ''
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          console.log(res.data)
+        }
+      })
+
       var objData = e.detail.value;
         // 同步方式存储表单数据
       wx.setStorageSync('info',objData)
 
       wx.navigateTo({
         url: '../result/result?height=' + e.detail.value.height + '&weight=' + e.detail.value.weight + '&age=' + e.detail.value.age + '&aerobic=' + e.detail.value.aerobic + '&energy=' + e.detail.value.energy
-        + '&sex=' + e.detail.value.sex + '&goal=' + e.detail.value.goal + "&sportIndex=" + e.detail.value.sportIndex
+        + '&sex=' + e.detail.value.sex + '&goal=' + e.detail.value.goal + "&sportIndex=" + e.detail.value.sportIndex 
       }),
         console.log(e.detail.value)
     }
@@ -126,6 +150,21 @@ Page({
   },
 
   onLoad: function () {
+    if (app.globalData.userInfo) {
+      this.setData({
+        hasUserInfo: true
+      })
+  
+    } else {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          hasUserInfo: true
+        })
+      }
+    }
+
     try {
       var info = wx.getStorageSync('info')
       if (info) {
@@ -158,5 +197,12 @@ Page({
     }
     
     console.log('onLoad')
+  },
+
+  getUserInfo: function (e) {
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      hasUserInfo: true
+    })
   }
 })

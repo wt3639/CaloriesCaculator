@@ -69,7 +69,8 @@
         </view>
       </view>
       <input class="inputlong" type="number" id="energy" name="energy" placeholder="建议:过剩200~500 缺口500~1000 (kcal)" value="{{energy}}" />
-      <button class='button' form-type="submit" type="primary">查看结果</button>
+      <button wx:if="{{hasUserInfo}}" class='button' form-type="submit" type="primary">查看结果</button>
+       <button wx:else class='button' open-type="getUserInfo" bindgetuserinfo="getUserInfo" type="primary">查看结果</button>
     </view>
   </form>
 
