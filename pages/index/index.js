@@ -30,7 +30,7 @@ Page({
         name: '专业运动员/劳力工作者'
       }
     ],
-    index: 0,
+    index: '0',
     goals: [
       { name: 'muscle', value: '增肌', checked: 'true' },
       { name: 'fat', value: '减脂' },
@@ -110,6 +110,9 @@ Page({
         duration: 2000
       })
     } else {
+      var objData = e.detail.value;
+      // 同步方式存储表单数据
+      wx.setStorageSync('info', objData)
       var si;
       switch (e.detail.value.sportIndex) {
         case '0': si = 1.2; break
@@ -133,9 +136,7 @@ Page({
         }
       })
 
-      var objData = e.detail.value;
-        // 同步方式存储表单数据
-      wx.setStorageSync('info',objData)
+     
 
       wx.navigateTo({
         url: '../result/result?height=' + e.detail.value.height + '&weight=' + e.detail.value.weight + '&age=' + e.detail.value.age + '&aerobic=' + e.detail.value.aerobic + '&energy=' + e.detail.value.energy
