@@ -122,11 +122,16 @@ Page({
         case '4': si = 1.9; break
       }
       wx.request({
-        url: 'https://www.tomwoo.tk/CounterWebApp/calory/getjson?height=' + e.detail.value.height + '&weight=' + e.detail.value.weight + '&age=' + e.detail.value.age + '&aerobic=' + e.detail.value.aerobic + '&energy=' + e.detail.value.energy
-        + '&Sex=' + e.detail.value.sex + '&Goal=' + e.detail.value.goal + "&sportIndex=" + si,
+        url: 'https://www.tomwoo.tk/CounterWebApp/calory/getjson',
         data: {
-          x: '',
-          y: ''
+          height: e.detail.value.height,
+          weight: e.detail.value.weight,
+          age: e.detail.value.age,
+          aerobic: e.detail.value.aerobic,
+          energy: e.detail.value.energy,
+          Sex: e.detail.value.sex ,
+          Goal: e.detail.value.goal,
+          sportIndex: si,
         },
         header: {
           'content-type': 'application/json'
