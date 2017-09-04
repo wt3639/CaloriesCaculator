@@ -125,7 +125,7 @@ Page({
       wx.request({
         url: 'https://www.tomwoo.tk/CounterWebApp/calory/getjson',
         data: {
-          openid: app.openid,
+          openid: app.globalData.openid,
           nickname: app.globalData.userInfo.nickName,
           height: e.detail.value.height,
           weight: e.detail.value.weight,
@@ -160,8 +160,10 @@ Page({
   },
 
   onLoad: function () {
-    app.openidReadyCallback = res => {
-      app.openid = res.data;
+    if(!app.globalData.openid){
+      app.openidReadyCallback = res => {
+        app.globalData.openid = res.data;
+      }
     }
     if (app.globalData.userInfo) {
       this.setData({
