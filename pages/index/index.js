@@ -121,17 +121,20 @@ Page({
         case '3': si = 1.725; break
         case '4': si = 1.9; break
       }
+      console.log(app.openid)
       wx.request({
         url: 'https://www.tomwoo.tk/CounterWebApp/calory/getjson',
         data: {
+          openid: app.openid,
+          nickname: app.globalData.userInfo.nickName,
           height: e.detail.value.height,
           weight: e.detail.value.weight,
           age: e.detail.value.age,
           aerobic: e.detail.value.aerobic,
           energy: e.detail.value.energy,
-          Sex: e.detail.value.sex ,
-          Goal: e.detail.value.goal,
-          sportIndex: si,
+          sex: e.detail.value.sex ,
+          goals: e.detail.value.goal,
+          sportindex: si,
         },
         header: {
           'content-type': 'application/json'
@@ -152,10 +155,14 @@ Page({
 
   },
   formReset: function () {
+  
     console.log('form发生了reset事件')
   },
 
   onLoad: function () {
+    app.openidReadyCallback = res => {
+      app.openid = res.data;
+    }
     if (app.globalData.userInfo) {
       this.setData({
         hasUserInfo: true
