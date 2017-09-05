@@ -41,6 +41,8 @@ Page({
     aerobic:'',
     energy:'',
     hasUserInfo: false,
+    idNotBack: true,
+    buttonText: '请稍等'
   },
 
   bindHelp: function () {
@@ -163,11 +165,22 @@ Page({
     if(!app.globalData.openid){
       app.openidReadyCallback = res => {
         app.globalData.openid = res.data;
+        wx.setStorageSync('userid', res.data);
+        this.setData({
+          idNotBack: false,
+          buttonText: '查看结果'
+        })
       }
+    }else{
+      this.setData({
+        idNotBack: false,
+        buttonText: '查看结果'
+      })
     }
     if (app.globalData.userInfo) {
       this.setData({
         hasUserInfo: true
+        
       })
   
     } else {

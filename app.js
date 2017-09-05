@@ -9,26 +9,36 @@ App({
   onLaunch: function () {
     var that = this
     // 登录
+    var uid = wx.getStorageSync('userid')
+    if (uid) {
+      that.globalData.openid = uid;
+    } else {
     wx.login({
       success: res => {
-        wx.request({
-          url: 'https://www.tomwoo.tk/CounterWebApp/calory/getOpenid',
-          data: {
-            ucode: res.code,
-          },
-          header: {
-            'content-type': 'application/json'
-          },
-          success: function (res) {
+        
+          wx.request({
+            url: 'https://www.tomwoo.tk/CounterWebApp/calory/getOpenid',
+            data: {
+              ucode: res.code,
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
               that.globalData.openid = res.data
+              wx.setStorageSync('userid', res.data)
               if (that.openidReadyCallback) {
                 that.openidReadyCallback(res)
               }
               console.log(res.data)
-           
-            
-          }
+
+
+            }
+          })
+        }
         })
+    }
+
         // 获取用户信息
         wx.getSetting({
           success: res => {
@@ -48,8 +58,8 @@ App({
           }
         })
 
-      }
-    })
+    
+  
    
     var res = wx.getSystemInfoSync();
     this.globalData.sysInfo = res;
