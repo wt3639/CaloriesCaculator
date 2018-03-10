@@ -81,7 +81,10 @@ page {
 .share{
   font-size: 35rpx;
 }
-
+.ad{
+  margin-top: 10rpx;
+  margin-left: 80rpx;
+}
 canvas{
   height: 140rpx;
   width: 670rpx;

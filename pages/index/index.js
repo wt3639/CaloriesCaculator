@@ -88,9 +88,7 @@ Page({
     })
   },
 
-  radioChange: function (e) {
-    console.log('radio发生change事件,携带value值为', e.detail.value)
-  },
+ 
 
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -232,5 +230,22 @@ Page({
     this.setData({
       hasUserInfo: true
     })
-  }
+  },
+
+  onShareAppMessage: function (res) {
+    if (res.from === 'menu') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '热量摄入计算器',
+      path: '/pages/index/index',
+      success: function (res) {
+        // 转发成功
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  },
 })

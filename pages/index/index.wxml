@@ -6,7 +6,7 @@
     </view>
 
     <view class="radioView">
-      <radio-group class='radio' bindchange="radioChange" name='sex'>
+      <radio-group class='radio'  name='sex'>
         <label wx:for="{{sex}}">
 <radio  id="{{item.name}}" value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
 </label>
