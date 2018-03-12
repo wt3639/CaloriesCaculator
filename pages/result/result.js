@@ -67,12 +67,12 @@ Page({
     BMI = BMI.toFixed(1);
     if (options.goal == "muscle") {
       need = (total + parseInt(options.energy));
-      prot = parseInt(2.2 * parseInt(options.weight));
+      prot = parseInt(parseInt(options.getProt) * 0.001 * parseInt(options.weight));
       fat = parseInt(need * 0.25 / 9);
       cab = parseInt((need - prot * 4 - fat * 9) / 4);
     } else {
       need = (total - parseInt(options.energy));
-      prot = parseInt(2.75 * parseInt(options.weight));
+      prot = parseInt(parseInt(options.getProt) * 0.001 * parseInt(options.weight));
       fat = parseInt(need * 0.2 / 9);
       cab = parseInt((need - prot * 4 - fat * 9) / 4);
     }

@@ -35,21 +35,20 @@ Page({
       { name: 'muscle', value: '增肌', checked: 'true' },
       { name: 'fat', value: '减脂' },
     ],
-    height:'',
-    weight:'',
-    age:'',
-    aerobic:'',
-    energy:'',
-    hasUserInfo: false,
-    idNotBack: true,
-    buttonText: '请稍等'
+    getProt: '2200',
+    energyText: '热量过剩(kcal)',
+    height: '',
+    weight: '',
+    age: '',
+    aerobic: '',
+    energy: '300',
   },
 
   bindHelp: function () {
     wx.showModal({
       title: '提示',
       content: '热量过剩：增肌时每日摄入的热量应大于每日消耗的热量，建议在200-500kcal之间，太多的过剩热量会增长过多脂肪\n热量缺口：减脂时每日需要摄入的热量应小于每日消耗的热量，建议在500-1000kcal之间,对应每周可减少约1-2斤的脂肪，热量缺口太大会导致基础代谢率降低或肌肉分解过多',
-      showCancel:false,
+      showCancel: false,
       success: function (res) {
         if (res.confirm) {
           console.log('用户点击确定')
@@ -88,7 +87,7 @@ Page({
     })
   },
 
- 
+
 
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -97,6 +96,29 @@ Page({
     })
   },
 
+  goalChange: function (e) {
+    console.log('radio发送选择改变，携带值为', e.detail.value)
+    if (e.detail.value == 'muscle') {
+      this.setData({
+        getProt: 2200,
+        energy: 300,
+        energyText: '热量过剩(kcal)',
+      })
+    } else {
+      this.setData({
+        getProt: 2750,
+        energy: 800,
+        energyText: '热量缺口(kcal)',
+      })
+    }
+  },
+
+  bindProtChange: function (e) {
+    console.log('slider发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      prot: e.detail.value
+    })
+  },
 
   formSubmit: function (e) {
     if (e.detail.value.height.length == 0 || e.detail.value.height < 0
@@ -121,66 +143,28 @@ Page({
         case '3': si = 1.725; break
         case '4': si = 1.9; break
       }
-      console.log(app.openid)
-      wx.request({
-        url: 'https://www.tomwoo.tk/CounterWebApp/calory/getjson',
-        data: {
-          openid: app.globalData.openid,
-          nickname: app.globalData.userInfo.nickName,
-          height: e.detail.value.height,
-          weight: e.detail.value.weight,
-          age: e.detail.value.age,
-          aerobic: e.detail.value.aerobic,
-          energy: e.detail.value.energy,
-          sex: e.detail.value.sex ,
-          goals: e.detail.value.goal,
-          sportindex: si,
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          console.log(res.data)
-        }
-      })
-
      
-
       wx.navigateTo({
         url: '../result/result?height=' + e.detail.value.height + '&weight=' + e.detail.value.weight + '&age=' + e.detail.value.age + '&aerobic=' + e.detail.value.aerobic + '&energy=' + e.detail.value.energy
-        + '&sex=' + e.detail.value.sex + '&goal=' + e.detail.value.goal + "&sportIndex=" + e.detail.value.sportIndex 
+        + '&sex=' + e.detail.value.sex + '&goal=' + e.detail.value.goal + "&sportIndex=" + e.detail.value.sportIndex+"&getProt=" + e.detail.value.getProt
       }),
         console.log(e.detail.value)
     }
 
   },
   formReset: function () {
-  
+
     console.log('form发生了reset事件')
   },
 
   onLoad: function () {
-    if(!app.globalData.openid){
-      app.openidReadyCallback = res => {
-        app.globalData.openid = res.data;
-        wx.setStorageSync('userid', res.data);
-        this.setData({
-          idNotBack: false,
-          buttonText: '查看结果'
-        })
-      }
-    }else{
-      this.setData({
-        idNotBack: false,
-        buttonText: '查看结果'
-      })
-    }
+  
     if (app.globalData.userInfo) {
       this.setData({
         hasUserInfo: true
-        
+
       })
-  
+
     } else {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
@@ -194,43 +178,39 @@ Page({
     try {
       var info = wx.getStorageSync('info')
       if (info) {
-       this.setData({
-         height:info.height,
-         weight:info.weight,
-         age:info.age,
-         index:info.sportIndex,
-         aerobic:info.aerobic,
-         energy:info.energy,
-         })
-         if(info.sex=='female'){
-           this.setData({
-             sex: [
-               { name: 'male', value: '男'  },
-               { name: 'female', value: '女', checked: 'true'},
-             ],
-           })
-         }
-         if(info.goal=='fat'){
-           this.setData({ goals: [
-             { name: 'muscle', value: '增肌' },
-             { name: 'fat', value: '减脂', checked: 'true' },
-           ],
-           })
-         }
+        this.setData({
+          getProt: info.getProt,
+          height: info.height,
+          weight: info.weight,
+          age: info.age,
+          index: info.sportIndex,
+          aerobic: info.aerobic,
+          energy: info.energy,
+        })
+        if (info.sex == 'female') {
+          this.setData({
+            sex: [
+              { name: 'male', value: '男' },
+              { name: 'female', value: '女', checked: 'true' },
+            ],
+          })
+        }
+        if (info.goal == 'fat') {
+          this.setData({
+            goals: [
+              { name: 'muscle', value: '增肌' },
+              { name: 'fat', value: '减脂', checked: 'true' },
+            ],
+          })
+        }
       }
     } catch (e) {
       // Do something when catch error
     }
-    
+
     console.log('onLoad')
   },
 
-  getUserInfo: function (e) {
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      hasUserInfo: true
-    })
-  },
 
   onShareAppMessage: function (res) {
     if (res.from === 'menu') {

@@ -61,16 +61,23 @@
 </label>
       </radio-group>
     </view>
+    <view class="section section_gap">
+     <view class="textView">
+  <text class="section__title">每kg体重摄入蛋白质(mg)</text>
+  </view>
+  <view class="slider">
+    <slider name="getProt" bindchange="bindProtChange"  min="1000" max="3500" step='50'  value="{{getProt}}" show-value/>
+  </view>
+</view>
     <view class="cost">
       <view class="miniTitle" style="flex-direction:row">
-        <text class="head" decode='true'>热量过剩/热量缺口(kcal)&ensp;</text>
+        <text class="head" decode='true'>{{energyText}}&ensp;</text>
         <view class="image" bindtap="bindHelp">
           <image class="icon" src="/images/22.png"></image>
         </view>
       </view>
       <input class="inputlong" type="number" id="energy" name="energy" placeholder="建议:过剩200~500 缺口500~1000 (kcal)" value="{{energy}}" />
-      <button wx:if="{{hasUserInfo}}" class='button' form-type="submit" type="primary" disabled="{{idNotBack}}" >{{buttonText}}</button>
-       <button wx:else class='button' open-type="getUserInfo" bindgetuserinfo="getUserInfo" type="primary">查看结果</button>
+      <button class='button' form-type="submit" type="primary">查看结果</button>
     </view>
   </form>
 
