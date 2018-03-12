@@ -85,18 +85,25 @@
        kcal 
       </view>
     </view>
-
-    <view class="textView">
+<!--第五行-->
+<view class='r5'>
+   <view class="r5c1">
       <text class="head">目的</text>
     </view>
-
-    <view class="radioView">
+    <view class="r5c2">
       <radio-group class='radio' bindchange="goalChange" name='goal'>
         <label wx:for="{{goals}}">
 <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
 </label>
       </radio-group>
     </view>
+</view>
+   
+
+    
+
+
+
     <view class="section section_gap">
      <view class="textView">
   <text class="section__title">每kg体重摄入蛋白质(mg)</text>

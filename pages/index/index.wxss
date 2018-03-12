@@ -166,6 +166,28 @@ page{
   
 }
 
+/*第5️⃣行*/
+
+.r5{
+  border-style: none solid solid solid;
+  height: 100rpx;
+  display: flex;
+  flex-direction: row;
+}
+.r5c1{
+  width: 296rpx;
+  border-right-style: solid;
+  line-height: 100rpx;
+  text-align: center;
+}
+
+.r5c2{
+  width: 400rpx;
+  line-height: 100rpx;
+}
+
+
+
 .icon{
   height: 40rpx;
   width: 40rpx;
