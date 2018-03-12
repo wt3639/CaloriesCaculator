@@ -1,53 +1,89 @@
 <!--index.wxml-->
 <view class="mainView">
   <form class='formView' bindsubmit="formSubmit" bindreset="formReset">
-    <view class="textView">
-      <text class="head">性别</text>
-    </view>
-
-    <view class="radioView">
-      <radio-group class='radio'  name='sex'>
-        <label wx:for="{{sex}}">
-<radio  id="{{item.name}}" value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
-</label>
-      </radio-group>
-    </view>
-    <view class="three" style="flex-direction:row;">
-      <view class="height">
-        身高(cm)
-        <input class="input" type="number" id="height" name="height" placeholder="cm" value="{{height}}" />
+  <!--第一行-->
+    <view class="r1">
+      <view class="r1c1">
+          <view class='r1c1r1'>
+            <text class="head">姓名</text>
+          </view>
+          <view class='r1c1r2'>
+             <text class="head">性别</text>
+          </view>
+          <view class='r1c1r3'>
+             <text class="head">年龄</text>
+          </view>
       </view>
-      <view class="weight">
-        体重(kg)
-        <input class="input" type="number" id="weight" name="weight" placeholder="kg" value="{{weight}}" />
-      </view>
-      <view class="age">
-        年龄(year)
-        <input class="input" type="number" id="age" name="age" placeholder="year" value="{{age}}" />
-      </view>
-    </view>
-    <view class="sportView">
-      <view class="miniTitle" style="flex-direction:row">
-        <text class="head" decode='true'>运动频次&ensp;</text>
-        <view class="image" bindtap="bindSportHelp">
-          <image class="icon" src="/images/22.png" ></image>
+      <view class="r1c2">
+        <view class='r1c2r1'>
+          <text class="head">{{userInfo.nickName}}</text>
+        </view>
+        <view class='r1c2r2'>
+          <radio-group class='radio'  name='sex'>
+            <label wx:for="{{sex}}">
+              <radio  id="{{item.name}}" value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+              </label>
+            </radio-group>
+        </view>
+        <view class='r1c2r3'>
+          <input class="input" type="number" id="age" name="age" placeholder="year" value="{{age}}" />
         </view>
       </view>
-      <picker class="picker" name="sportIndex" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+      <view class="r1c3">
+        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      </view>
+    </view>
+  
+  <!--第二行-->
+    <view class="r2">
+      <view class="r2c1">
+        <text class="head">身高(cm)</text>
+      </view>
+      <view class="r2c2">
+        <input class="input" type="number" id="height" name="height" placeholder="cm" value="{{height}}" />
+      </view>
+      <view class="r2c3">
+         <text class="head">体重(kg)</text>
+      </view>
+      <view class='r2c4'>
+        <input class="input" type="number" id="weight" name="weight" placeholder="kg" value="{{weight}}" />
+      </view>
+    </view>
+
+  <!--第三行-->
+    <view class='r3'>
+      <view class='r3c1'>      
+          <view class='r3c1c1'>
+            <text class="head" decode='true'>运动频次&ensp;</text>
+          </view>
+          <view class="image" bindtap="bindSportHelp">
+            <image class="icon" src="/images/22.png" ></image>
+          </view>
+      </view>
+      <view class='r3c2'>
+        <picker class="picker" name="sportIndex" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
         <view>
           {{array[index]}}
         </view>
-      </picker>
-
+        </picker>
+      </view>   
     </view>
-    <view class="cost">
-      <view class="miniTitle" style="flex-direction:row">
-        <text class="head" decode='true'>有氧消耗(kcal)&ensp;</text>
+    <!--第四行-->
+    <view class="r4">
+      <view class="r4c1" style="flex-direction:row">
+        <view class='r4c1c1'>
+          <text class="head" decode='true'>有氧消耗&ensp;</text>
+        </view>
         <view class="image" bindtap="bindAerobicHelp">
           <image class="icon" src="/images/22.png" ></image>
         </view>
       </view>
+      <view class='r4c2'>
       <input class="inputlong" type="number" id="aerobic" name="aerobic" placeholder="kcal" value="{{aerobic}}" />
+      </view> 
+      <view class='r4c3'>
+       kcal 
+      </view>
     </view>
 
     <view class="textView">

@@ -6,39 +6,166 @@ page{
   margin:20rpx 20rpx 20rpx 20rpx;
   font-size: 40rpx;
 }
-.input{
- 
-  width: 160rpx;
-  border: solid;
-  border-color: #cfe2f3;
-  border-width: 5rpx;
-  border-radius: 40rpx;
-  height: 80rpx;
+/*第一行*/
+.r1{
+  display: flex;
+  flex-direction: row;
+  height: 310rpx;
   font-size: 40rpx;
   text-align: center;
-}
-.inputlong{
- 
   border: solid;
-  border-color: #cfe2f3;
-  border-width: 5rpx;
-  border-radius: 40rpx;
-  height: 80rpx;
-  font-size: 40rpx;
-    text-align: center;
-    margin-bottom: 20rpx;
+}
+
+.r1c1{
+  width:150rpx;
+  line-height: 100rpx;
+  text-align: center;
+}
+
+.r1c1r1{
+  height: 100rpx;
+}
+
+.head{
+  margin-top: 30rpx;
+}
+
+.r1c1r2{
+  height: 100rpx;
+   border-style:solid none none none;
+}
+
+.r1c1r3{
+  height: 100rpx;
+  border-style:solid none none none;
+}
+
+.r1c2{
+  width: 350rpx;
+ line-height: 100rpx;
+}
+
+.r1c2r1{
+  height: 100rpx;
+   border-style:none solid none solid;
+}
+
+.r1c2r2{
+   height: 100rpx;
+   border-style:solid solid none solid;
+}
+.r1c2r3{
+   height: 100rpx;
+   border-style:solid solid none solid;
+}
+.r1c3{
+  height: 310rpx;
+  width: 210rpx;
+}
+
+.userinfo-avatar {
+  margin-top: 80rpx;
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+}
+
+/*第二行*/
+.r2{
+  display: flex;
+  height: 100rpx;
+  flex-direction:row;
+  line-height: 100rpx;
+  text-align: center;
+  border-style: none solid solid solid
+}
+
+.r2c1{
+  width: 300rpx;
+  border-style: none solid none none
+}
+.r2c2{
+  width: 300rpx;
+   border-style: none solid none none
+}
+.r2c3{
+  width: 300rpx;
+   border-style: none solid none none
+}
+.r2c4{
+  width: 300rpx;
+}
+
+.input{
+  height: 100rpx;
+}
+/*第三行*/
+.r3{
+  border-style: none solid solid solid;
+  display: flex;
+}
+.r3c1{
+  width: 300rpx;
+  display: flex;
+  flex-direction: row;
+  border-right-style: solid
+}
+
+.image{
+  
+  margin-top: 11rpx;
+  margin-left: 5rpx;
+}
+.r3c1c1{
+  margin-left: 5rpx;
+  line-height: 100rpx;
+  text-align: center;
+}
+.r3c2{
+  width: 400rpx
 }
 .picker{
   font-size: 40rpx;
-   border: solid;
-  border-color: #cfe2f3;
-  border-width: 5rpx;
-  border-radius: 40rpx;
-   height: 80rpx;
-    text-align: center;
-    
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+}
+
+/*第四行*/
+
+.r4{
+  border-style: none solid solid solid;
+  display: flex;
+  flex-direction: row;
+}
+.r4c1{
+  width: 296rpx;
+  display: flex;
+  flex-direction: row;
+  border-right-style: solid
+}
+
+.r4c1c1{
+  line-height: 100rpx;
+  text-align: center;
+}
+.r4c2{
+  width: 300rpx
+}
+
+.inputlong{
+  height: 100rpx;
+  width: 300rpx;
+  font-size: 40rpx;
+  text-align: center;
+}
+
+.r4c3{
+  line-height: 100rpx;
+  text-align: center;
   
 }
+
 .icon{
   height: 40rpx;
   width: 40rpx;
@@ -77,11 +204,7 @@ page{
   line-height: 80rpx;
    
 }
-.three{
-  display: flex;
-  height: 160rpx;
-  line-height: 80rpx;
-}
+
 .weight{
   margin-left: 70rpx;
   

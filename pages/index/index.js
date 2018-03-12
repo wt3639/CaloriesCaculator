@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 var app = getApp()
+var userInfo = {}
 Page({
   data: {
     sex: [
@@ -42,6 +43,7 @@ Page({
     age: '',
     aerobic: '',
     energy: '300',
+    
   },
 
   bindHelp: function () {
@@ -158,23 +160,23 @@ Page({
   },
 
   onLoad: function () {
-  
     if (app.globalData.userInfo) {
       this.setData({
-        hasUserInfo: true
-
+        userInfo: app.globalData.userInfo,
       })
-
+      userInfo = app.globalData.userInfo;
+      console.log(userInfo);
     } else {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
         this.setData({
-          hasUserInfo: true
+          userInfo: res.userInfo,
         })
+        userInfo = res.userInfo;
+        console.log(userInfo);
       }
     }
-
     try {
       var info = wx.getStorageSync('info')
       if (info) {
