@@ -37,13 +37,13 @@ Page({
       { name: 'fat', value: '减脂' },
     ],
     getProt: '2200',
-    energyText: '热量过剩(kcal)',
+    energyText: '热量过剩',
     height: '',
     weight: '',
     age: '',
     aerobic: '',
     energy: '300',
-    
+    advice:'建议:200~500'
   },
 
   bindHelp: function () {
@@ -104,13 +104,15 @@ Page({
       this.setData({
         getProt: 2200,
         energy: 300,
-        energyText: '热量过剩(kcal)',
+        energyText: '热量过剩',
+        advice: '建议:200~500',
       })
     } else {
       this.setData({
         getProt: 2750,
         energy: 800,
-        energyText: '热量缺口(kcal)',
+        energyText: '热量缺口',
+        advice: '建议:500~1000'
       })
     }
   },
@@ -203,6 +205,8 @@ Page({
               { name: 'muscle', value: '增肌' },
               { name: 'fat', value: '减脂', checked: 'true' },
             ],
+            energyText: '热量缺口',
+            advice: '建议:500~1000'
           })
         }
       }

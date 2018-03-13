@@ -99,29 +99,34 @@
     </view>
 </view>
    
-
-    
-
-
-
-    <view class="section section_gap">
-     <view class="textView">
-  <text class="section__title">每kg体重摄入蛋白质(mg)</text>
-  </view>
-  <view class="slider">
-    <slider name="getProt" bindchange="bindProtChange"  min="1000" max="3500" step='50'  value="{{getProt}}" show-value/>
-  </view>
-</view>
-    <view class="cost">
-      <view class="miniTitle" style="flex-direction:row">
-        <text class="head" decode='true'>{{energyText}}&ensp;</text>
+<!--第六行-->
+<view class="r6">
+      <view class="r6c1" style="flex-direction:row">
+        <view class='r6c1c1'>
+          <text class="head" decode='true'>{{energyText}}&ensp;</text>
+        </view>
         <view class="image" bindtap="bindHelp">
           <image class="icon" src="/images/22.png"></image>
         </view>
       </view>
-      <input class="inputlong" type="number" id="energy" name="energy" placeholder="建议:过剩200~500 缺口500~1000 (kcal)" value="{{energy}}" />
-      <button class='button' form-type="submit" type="primary">查看结果</button>
+      <view class='r6c2'>
+      <input class="inputlong" type="number" id="energy" name="energy" placeholder="{{advice}}"  value="{{energy}}" />
+      </view> 
+      <view class='r6c3'>
+       kcal 
+      </view>
     </view>
+
+  <!--第七第八行-->
+    <view class="section section_gap">
+     <view class="r7">
+  <text class="section__title">每kg体重摄入蛋白质(mg)</text>
+  </view>
+  <view class="r8">
+    <slider name="getProt" bindchange="bindProtChange"  min="1000" max="3500" step='50'  value="{{getProt}}" show-value/>
+  </view>
+</view>
+      <button class='button' form-type="submit" type="primary">查看结果</button>
   </form>
 
 
