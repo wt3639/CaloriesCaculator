@@ -89,7 +89,20 @@ Page({
     })
   },
 
-
+  bindGoalHelp: function () {
+    wx.showModal({
+      title: '提示',
+      content: '选择目的后，会根据目的自动生成热量过剩/缺口以及每kg体重摄入蛋白质的推荐值，可根据自己的实际情况修改',
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
 
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)

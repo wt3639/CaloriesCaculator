@@ -88,10 +88,15 @@
 <!--第五行-->
 <view class='r5'>
    <view class="r5c1">
-      <text class="head">目的</text>
+   <view class='r5c1c1'>
+    <text class="head" decode='true'>目的&ensp;</text>
+   </view>
+   <view class="image" bindtap="bindGoalHelp">
+          <image class="icon" src="/images/22.png" ></image>
+        </view>
     </view>
     <view class="r5c2">
-      <radio-group class='radio' bindchange="goalChange" name='goal'>
+        <radio-group class='radio' bindchange="goalChange" name='goal'>
         <label wx:for="{{goals}}">
 <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
 </label>
