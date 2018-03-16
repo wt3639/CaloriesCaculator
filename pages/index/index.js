@@ -43,7 +43,7 @@ Page({
     age: '',
     aerobic: '',
     energy: '300',
-    advice:'建议:200~500'
+    advice: '建议:200~500'
   },
 
   bindHelp: function () {
@@ -182,10 +182,10 @@ Page({
           console.log(res.data)
         }
       })
-     
+
       wx.navigateTo({
         url: '../result/result?height=' + e.detail.value.height + '&weight=' + e.detail.value.weight + '&age=' + e.detail.value.age + '&aerobic=' + e.detail.value.aerobic + '&energy=' + e.detail.value.energy
-        + '&sex=' + e.detail.value.sex + '&goal=' + e.detail.value.goal + "&sportIndex=" + e.detail.value.sportIndex+"&getProt=" + e.detail.value.getProt
+        + '&sex=' + e.detail.value.sex + '&goal=' + e.detail.value.goal + "&sportIndex=" + e.detail.value.sportIndex + "&getProt=" + e.detail.value.getProt
       }),
         console.log(e.detail.value)
     }
@@ -255,7 +255,7 @@ Page({
     } catch (e) {
       // Do something when catch error
     }
-
+   
     console.log('onLoad')
   },
 

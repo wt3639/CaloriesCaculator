@@ -13,7 +13,8 @@ var BMI = null
 var heightTemp = null
 var weightTemp = null
 var userInfo = {}
-var adStr = ['腹愁者蛋白棒3盒全口味\n 代餐能量棒 包邮\n【在售价】239.90元\n【券后价】224.90元\n-----------------\n点击下方复制这条信息，￥nqf00LfTL23￥ ，打开【手机淘宝】即可领取超值优惠券', 'Myprotein熊猫乳清蛋白质粉2.5KG运动鱼油软胶囊90粒【包邮】\n【在售价】378.00元\n【券后价】348.00元\n-----------------\n  点击下方复制这条信息，￥YlVf0p4WHNg￥ ，打开【手机淘宝】即可领取超值优惠券', '【鲨鱼菲特】速食鸡胸肉健身即食代餐低脂高蛋白真空50片量贩装【包邮】\n【在售价】329.90元\n【券后价】319.90元\n-----------------\n  点击下方复制这条信息，￥2uyc0L88k2J￥ ，打开【手机淘宝】即可领取超值优惠券', '优追麦克斯增肌零食健身代餐鸡胸肉Max即食多种口味150g\8袋热销【包邮】\n【在售价】86.90元\n【券后价】81.90元\n-----------------\n  点击下方复制这条信息，￥cMzf0L52scH￥ ，打开【手机淘宝】即可领取超值优惠券', '腹愁者乳清蛋白粉健身增肌 瘦人增健肌粉蛋白质粉袋装芝士海盐味【包邮】\n【在售价】127.20元\n【券后价】122.20元\n-----------------\n  点击下方复制这条信息，￥EaZS0L5lBQ7￥ ，打开【手机淘宝】即可领取超值优惠券']
+var adStr = '腹愁者蛋白棒3盒全口味\n 代餐能量棒 包邮\n【在售价】239.90元\n【券后价】224.90元\n-----------------\n点击下方复制这条信息，￥nqf00LfTL23￥ ，打开【手机淘宝】即可领取超值优惠券'
+
 Page({
   data: {
     // text:"这是一个页面" 
@@ -142,17 +143,21 @@ Page({
   },
 
 bindAdWindow:function(){
-  var num = Math.floor(Math.random() * adStr.length)
+  var saveAdText = wx.getStorageSync('adText')
+  if(saveAdText){
+    adStr = saveAdText;
+  }
+  var editStr = adStr.replace(/\s+/g, "\n")
   wx.showModal({
     title: '福利',
-    content: adStr[num],
+    content: editStr,
     showCancel: false,
     confirmText:'复制信息',
     success: function (res) {
       if (res.confirm) {
         console.log('用户点击确定')
         wx.setClipboardData({
-          data: adStr[num],
+          data: adStr,
           success: function (res) {
             wx.getClipboardData({
               success: function (res) {
