@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/result/result",
-    "pages/forward/forward"
+    "pages/forward/forward",
+    "pages/scrollline/scrollline"
   ],
   "window": {
     "backgroundTextStyle": "light",

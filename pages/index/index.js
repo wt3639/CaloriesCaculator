@@ -136,7 +136,10 @@ Page({
       prot: e.detail.value
     })
   },
-
+  chart: function (e) {
+    wx.navigateTo({
+      url: '../scrollline/scrollline'
+    })},
   formSubmit: function (e) {
     if (e.detail.value.height.length == 0 || e.detail.value.height < 0
       || e.detail.value.weight.length == 0 || e.detail.value.weight < 0
