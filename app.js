@@ -5,6 +5,7 @@ App({
     sysInfo: null,
     rpx2px: null,
     openid: null,
+    userHistory:null,
   },
   onLaunch: function () {
     var that = this
@@ -76,6 +77,19 @@ App({
       }
     })
 
+    wx.request({
+      url: 'https://www.tomwoo.tk/CounterWebApp/calory/getHistory',
+      data: {
+        id: that.globalData.openid,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        console.log(res.data)
+        that.globalData.userHistory = res.data.userList;
+      }
+    })
 
     var res = wx.getSystemInfoSync();
     this.globalData.sysInfo = res;

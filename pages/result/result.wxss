@@ -91,3 +91,7 @@ canvas{
   margin-left: 45rpx;
 }
 
+.canvas{
+  width: 90%;
+  height: 300rpx;
+}

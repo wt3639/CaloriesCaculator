@@ -139,7 +139,9 @@ Page({
   chart: function (e) {
     wx.navigateTo({
       url: '../scrollline/scrollline'
-    })},
+    });
+   
+    },
   formSubmit: function (e) {
     if (e.detail.value.height.length == 0 || e.detail.value.height < 0
       || e.detail.value.weight.length == 0 || e.detail.value.weight < 0
@@ -152,6 +154,13 @@ Page({
         duration: 2000
       })
     } else {
+      wx.showLoading({
+        title: '计算中',
+      })
+
+      setTimeout(function () {
+        wx.hideLoading()
+      }, 1000)
       var objData = e.detail.value;
       // 同步方式存储表单数据
       wx.setStorageSync('info', objData)
@@ -185,7 +194,7 @@ Page({
           console.log(res.data)
         }
       })
-
+      
       wx.navigateTo({
         url: '../result/result?height=' + e.detail.value.height + '&weight=' + e.detail.value.weight + '&age=' + e.detail.value.age + '&aerobic=' + e.detail.value.aerobic + '&energy=' + e.detail.value.energy
         + '&sex=' + e.detail.value.sex + '&goal=' + e.detail.value.goal + "&sportIndex=" + e.detail.value.sportIndex + "&getProt=" + e.detail.value.getProt

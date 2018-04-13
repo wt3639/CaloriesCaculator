@@ -46,7 +46,7 @@
          <text class="head">体重(kg)</text>
       </view>
       <view class='r2c4'>
-        <input class="input" type="number" id="weight" name="weight" placeholder="kg" value="{{weight}}" />
+        <input class="input" type="digit" id="weight" name="weight" placeholder="kg" value="{{weight}}" />
       </view>
     </view>
 
@@ -134,5 +134,5 @@
       <button class='button' form-type="submit" type="primary">查看结果</button>
   </form>
 
-<button class='button' bindtap="chart" type="primary">图表</button>
+
 </view>
