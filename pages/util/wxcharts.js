@@ -1931,11 +1931,10 @@ var Charts = function Charts(opts) {
     this.chartData = {};
     this.event = new Event();
     this.scrollOption = {
-        currentOffset: 0,
+      currentOffset: 0,
         startTouchX: 0,
         distance: 0
     };
-
     drawCharts.call(this, opts.type, opts, config$$1, this.context);
 };
 

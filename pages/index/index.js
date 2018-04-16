@@ -217,6 +217,7 @@ Page({
     }
 
     if (app.globalData.userInfo) {
+      //console.log("hello"+app.globalData.userInfo)
       this.setData({
         userInfo: app.globalData.userInfo,
       })

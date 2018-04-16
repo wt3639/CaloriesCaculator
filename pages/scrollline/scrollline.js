@@ -7,10 +7,12 @@ Page({
     data: {
   
     },
-    touchHandler: function (e) {
+    touchHandler: function (e) { 
+      //console.log(e)
         lineChart.scrollStart(e);
     },
     moveHandler: function (e) {
+      //console.log(e)
         lineChart.scroll(e);
     },
     touchEndHandler: function (e) {
@@ -60,10 +62,10 @@ Page({
           var updateData = {
             categories: simulationData.categories,
             series: [{
-              name: '体重1',
+              name: '体重',
               data: simulationData.data,
               format: function (val, name) {
-                return val.toFixed(2) + 'kg';
+                return val.toFixed(1) + 'kg';
               }
             }],
           }
@@ -73,46 +75,48 @@ Page({
      
     },
     onLoad: function (e) {
-        var windowWidth = 320;
-        try {
-            var res = wx.getSystemInfoSync();
-            windowWidth = res.windowWidth;
-        } catch (e) {
-            console.error('getSystemInfoSync failed!');
-        }
-        userHistory = app.globalData.userHistory;
-        var simulationData = this.createSimulationData();
-        lineChart = new wxCharts({
-          canvasId: 'lineCanvas',
-          type: 'line',
-          categories: simulationData.categories,
-          animation: false,
-          series: [{
-            name: '体重',
-            data: simulationData.data,
-            format: function (val, name) {
-              return val.toFixed(2) + 'kg';
-            }
-          }],
-          xAxis: {
-            disableGrid: false
-          },
-          yAxis: {
-            title: '体重 (kg)',
-            format: function (val) {
-              return val.toFixed(2);
-            },
-            
-          },
-          width: windowWidth,
-          height: 300,
-          legend:false,
-          dataLabel: true,
-          dataPointShape: true,
-          enableScroll: true,
-          extra: {
-            lineStyle: 'curve'
+      var windowWidth = 320;
+      try {
+        var res = wx.getSystemInfoSync();
+        windowWidth = res.windowWidth;
+      } catch (e) {
+        console.error('getSystemInfoSync failed!');
+      }
+      userHistory = app.globalData.userHistory;
+      var simulationData = this.createSimulationData();
+      lineChart = new wxCharts({
+        canvasId: 'lineCanvas',
+        type: 'line',
+        categories: simulationData.categories,
+        animation: false,
+        series: [{
+          name: '体重',
+          data: simulationData.data,
+          format: function (val, name) {
+            return val.toFixed(1) + 'kg';
           }
-        });
+        }],
+        xAxis: {
+          disableGrid: false
+        },
+        yAxis: {
+          title: '体重 (kg)',
+          format: function (val) {
+            return val.toFixed(1);
+          },
+
+        },
+        width: windowWidth*1.1 ,
+        height: 300,
+        legend: false,
+        dataLabel: true,
+        dataPointShape: true,
+        enableScroll: true,
+        extra: {
+          lineStyle: 'curve'
+        }
+      });
+     // lineChart.scrollStart(e);
+     // lineChart.scroll(e);
     }
 });

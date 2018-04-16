@@ -1,5 +1,6 @@
-/* pages/scrollline/scrollline.wxss */
+
 .canvas{
   width: 100%;
   height: 300px;
+  
 }

@@ -158,7 +158,7 @@ Page({
         },
 
       },
-      width: windowWidth,
+      width: windowWidth*0.9,
       height: 150,
       legend: false,
       dataLabel: true,
