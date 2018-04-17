@@ -3,7 +3,7 @@
     "pages/index/index",
     "pages/result/result",
     "pages/forward/forward",
-    "pages/scrollline/scrollline"
+    "pages/line/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

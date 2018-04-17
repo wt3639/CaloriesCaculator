@@ -1,5 +1,0 @@
-<view class="container">
-<view style="margin-top:30px;text-align:center">体重记录图</view>
-    <canvas class='canvas' canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler" bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
-    
-</view>

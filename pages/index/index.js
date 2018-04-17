@@ -138,7 +138,7 @@ Page({
   },
   chart: function (e) {
     wx.navigateTo({
-      url: '../scrollline/scrollline'
+      url: '../line/index'
     });
    
     },
