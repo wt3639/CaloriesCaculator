@@ -17,5 +17,8 @@
     </view>
     
   </scroll-view>
-  <button class='button' bindtap="addPlan" type="primary">新增计划</button>
+  <button class='button' bindtap="addPlan" type="primary">新增计划
+  </button>
+   <button class='button' bindtap="checkHis" type="primary">查看历史
+  </button>
 </view>

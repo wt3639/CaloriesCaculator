@@ -1,0 +1,54 @@
+<view class='mainView'>
+  <view class='row'>
+    <view class='mainHead'>手冲历史记录</view>
+  </view>
+  <view>
+    <block wx:for="{{recordArray}}">
+      <view >
+        <view class='info'>
+          <view class='row'>
+            <view class='head'>时间:</view>
+            <view class='context'>{{item.Date}}</view>
+          </view>
+          <view class='row'>
+            <view class='head'>咖啡豆名:</view>
+            <view class='context'>{{item.coffeeName}}</view>
+          </view>
+          <view class='row'>
+            <view class='head'>研磨程度:</view>
+            <view class='context'>{{grindArray[item.grindIndex]}}</view>
+            <view class='head'>水温:</view>
+            <view class='context'>{{item.waterTemp}}℃</view>
+          </view>
+          <view class='row'>
+            <view class='head'>咖啡豆量:</view>
+            <view class='context'>{{item.powderM}}g</view>
+            <view class='head'>注水量:</view>
+            <view class='context'>{{item.waterM}}ml</view>
+          </view>
+          <view class='row'>
+            <view class='head'>实际焖蒸时间:</view>
+            <view class='context'>{{item.brewTime}}s</view>
+            <view class='head'>实际总耗时:</view>
+            <view class='context'>{{item.totalTime}}s</view>
+          </view>
+          <view class='row'>
+            <view class='head'>酸度:</view>
+            <view class='context'>{{item.sourIndex}}</view>
+            <view class='head'>甜度:</view>
+            <view class='context'>{{item.sweetIndex}}</view>
+             <view class='head'>苦度:</view>
+            <view class='context'>{{item.bitterIndex}}</view>
+             <view class='head'>综评:</view>
+            <view class='context'>{{item.rate}}</view>
+          </view>
+          <view class='row'>
+            <view class='head'>记录:</view>
+          </view>
+           <view class='context'>{{item.context}}</view>
+        </view>
+        </view>
+    </block>
+    </view>
+  </view>
+  

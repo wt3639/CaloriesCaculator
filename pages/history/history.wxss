@@ -1,0 +1,49 @@
+page{
+  background: #180c00;
+  color: white;
+}
+.progress{
+  transform: rotate(270deg);
+  width: 500rpx;
+  height: 500rpx;
+  margin-top: 50rpx;
+  margin-left: 125rpx;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 50rpx;
+  padding-top: 10rpx;
+}
+
+.mainHead{
+  text-align: center;
+  font: 20rpx;
+  color: #b49e89;
+  width: 700rpx;
+}
+
+.info{
+  border: solid #423024 4rpx;
+  padding: 15rpx;
+}
+
+.head{
+    color: #b49e89
+}
+.mainView{
+  margin: 20rpx;
+}
+
+.context{
+  color: white;
+
+}
+
+.button{
+  margin-top: 10rpx;
+  background: #bf723e;
+  color: white;
+}
