@@ -27,18 +27,18 @@
 
 </view>
 
-<modal  hidden="{{hiddenmodalput}}" title="实际完成" confirm-text="取消" no-cancel="true" bindconfirm="actionConfirm">
+<modal  hidden="{{hiddenmodalput}}" title="完成情况" confirm-text="取消" no-cancel="true" bindconfirm="actionConfirm">
 <form class='formView' bindsubmit="formSubmit" bindreset="formReset">
 <view  hidden='{{formHide}}'> 
-<text>动作名称:{{actionName}}</text>
- <text>第{{setnum}}组</text>
+<view>动作名称:{{actionName}}</view>
+ <view>第{{setnum}}组</view>
     <text>次数</text>  
      <input  type='number' name="repeats" value="{{repeats}}" />  
     <text>重量</text>
       <input  type='digit' name="weight" value="{{weight}}"  />
       <button class='button' bindtap='restComplete'type="primary">下一组</button>
 </view>
-<view hidden='{{!formHide}}'>{{count}}</view>
+<view class="countdown" hidden='{{!formHide}}'>{{count}}</view>
        <button hidden='{{!formHide}}' class='button' form-type="submit" type="primary">休息完成</button>
 
 

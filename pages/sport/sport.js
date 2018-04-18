@@ -111,12 +111,14 @@ Page({
     this.setData({
       hiddenmodalput: false,
     })
+
   },
   nameInputOver: function (e) {
 
   },
 
   formSubmit: function (e) {
+    clearTimeout(timer);
     console.log(e)
     var actionHistory = {
       name: null,
@@ -138,6 +140,7 @@ Page({
       this.setData({
         hiddenmodalput: true,
         actionList:tempActionList,
+        formHide: false,
       })
      console.log(this.data.actionList)
      
@@ -180,33 +183,7 @@ restComplete:function(){
       sets: null,
     })
   },
-  planSubmit: function (e) {
-    var planList = wx.getStorageSync("planList") || [];
-    var plan = {
-      name: null,
-    };
-    plan.name = e.detail.value.planName;
-    plan.actionList = this.data.actionList;
-    console.log(plan)
-    if (id == null) {
-      planList.push(plan)
-    } else {
-      planList.splice(id, 1, plan)
-    }
 
-    wx.setStorageSync("planList", planList);
-    wx.navigateBack({
-      url: '../workout/workout',
-    })
-  },
-
-  deleteAction: function (e) {
-    var actionList = this.data.actionList;
-    actionList.splice(e.target.dataset.index, 1)
-    this.setData({
-      actionList: actionList,
-    })
-  },
   startAction(e) {
     var actionList = this.data.actionList;
     var action = actionList[e.target.dataset.index]
