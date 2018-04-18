@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    planList:null,
   },
 
   /**
@@ -26,7 +26,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    var pl = wx.getStorageSync("planList") || []
+    this.setData({
+      planList: pl,
+    })
   },
 
   /**
@@ -62,5 +65,20 @@ Page({
    */
   onShareAppMessage: function () {
     
+  },
+
+  addPlan:function(){
+    wx.navigateTo({
+      url: '../operation/operation',
+    })
+  },
+
+  deletePlan:function(e){
+    var planList = this.data.planList;
+    planList.splice(e.target.dataset.index,1)
+    wx.setStorageSync("planList", planList);
+    this.setData({
+      planList:planList,
+    })
   }
 })

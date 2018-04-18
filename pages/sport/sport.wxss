@@ -19,12 +19,12 @@
   border: #ddd 1px solid
 }
 .column{
-  width:4rem;
+  width:6rem;
   display: table-cell
 }
 
 .link-column{
-  width: 12rem;
+  width: 8rem;
   display: table-cell;
 }
 

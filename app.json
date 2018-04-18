@@ -3,7 +3,10 @@
     "pages/index/index",
     "pages/result/result",
     "pages/forward/forward",
-    "pages/line/index"
+    "pages/line/index",
+    "pages/workout/workout",
+    "pages/operation/operation",
+    "pages/sport/sport"
   ],
   "window": {
     "backgroundTextStyle": "light",

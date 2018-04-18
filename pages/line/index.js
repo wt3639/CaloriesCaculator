@@ -7,7 +7,7 @@ var userHistory = null;
 Page({
   onShareAppMessage: res => {
     return {
-      title: 'ECharts 可以在微信小程序中使用啦！',
+      title: '热量摄入计算器',
       path: '/pages/index/index',
       success: function () { },
       fail: function () { }

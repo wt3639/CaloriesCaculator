@@ -134,5 +134,5 @@
       <button class='button' form-type="submit" type="primary">查看结果</button>
   </form>
 <button class='button' bindtap="chart" type="primary">身体档案</button>
-
+<button class='button' bindtap="workout" type="primary">训练计划</button>
 </view>
