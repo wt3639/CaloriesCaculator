@@ -5,11 +5,12 @@
   </view>
   <scroll-view scoll-y="true">
     <view class="widget" wx:for="{{actionList}}">
-      <view bindtap='startAction' data-index="{{index}}">
-      <view class='row'>
-        <text>{{item.name}}</text>
-        <text hidden='{{!item.hide}}'>完成</text>
-      </view>
+      <view style="color:{{item.color}}" bindtap='startAction' data-index="{{index}}">
+        <view class='row'>
+          <text>{{item.name}}</text>
+          <text hidden='{{item.hide}}'>未完成</text>
+          <text hidden='{{!item.hide}}'>完成</text>
+        </view>
         <view class='row'>
           <text>每组次数:{{item.repeats}}</text>
           <text>重量:{{item.weight}}kg</text>
@@ -22,22 +23,30 @@
 
 </view>
 
-<modal hidden="{{hiddenmodalput}}" title="完成情况" confirm-text="完成本动作训练" bindconfirm="actionConfirm" bindcancel="actionCancel">
+<modal hidden="{{hiddenmodalput}}" title="{{actionName}}" confirm-text="完成该动作" bindconfirm="actionConfirm" bindcancel="actionCancel">
   <form class='formView' bindsubmit="formSubmit" bindreset="formReset">
     <view hidden='{{formHide}}'>
-      <view>动作名称:{{actionName}}</view>
-      <view>计划组数:{{sets}}</view>
-      <view>第{{setnum}}组</view>
-      <text>次数</text>
-      <input type='number' name="repeats" value="{{repeats}}" />
-      <text>重量</text>
-      <input type='digit' name="weight" value="{{weight}}" />
-      <button form-type="submit" type="primary">完成本组</button>
+      <view class='line'>第{{setnum}}/{{sets}}组</view>
+      <view class='doingLine'>
+        <text class='text'>次数</text>
+        <text class='text'>重量</text>
+      </view>
+      <view>
+        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 250rpx;" value="{{value}}" bindchange="bindChange">
+          <picker-view-column>
+            <view wx:for="{{reas}}" style="line-height: 50px ;text-align: center;">{{item}}</view>
+          </picker-view-column>
+          <picker-view-column>
+            <view wx:for="{{weis}}" style="line-height: 50px;text-align: center;">{{item}}kg</view>
+          </picker-view-column>
+        </picker-view>
+      </view>
+      <button class="modalButton" form-type="submit" type="primary">完成本组</button>
+      
     </view>
     <text hidden='{{!formHide}}'>休息时间:</text>
     <view class="countdown" hidden='{{!formHide}}'>{{count}}</view>
-    <button hidden='{{!formHide}}'  bindtap='restComplete' type="primary">下一组</button>
-
-
+    <button hidden='{{!formHide}}' bindtap='restComplete' type="primary">下一组</button>
+   
   </form>
 </modal>

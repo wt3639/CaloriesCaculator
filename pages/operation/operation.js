@@ -1,6 +1,20 @@
 var id = null;
 var editFlag = false;
 var actionIndex = null;
+const reas = []
+const weis = []
+const setArray = []
+for (let i = 0; i <= 30; i++) {
+  reas.push(i)
+}
+
+for (let i = 0; i <= 300; i += 2.5) {
+  weis.push(i)
+}
+
+for (let i = 0; i <= 10; i++) {
+  setArray.push(i)
+}
 Page({
 
   /**
@@ -14,8 +28,20 @@ Page({
     repeats: null,
     weight: null,
     sets: null,
+    reas: reas,
+    weis: weis,
+    setArray:setArray,
+    value: [1, 1, 1],
   },
 
+  bindChange: function (e) {
+    const val = e.detail.value
+    this.setData({
+      repeats: this.data.reas[val[0]],
+      weight: this.data.weis[val[1]],
+      sets: this.data.setArray[val[2]],
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -85,6 +111,10 @@ Page({
   addAction: function () {
     this.setData({
       hiddenmodalput: false,
+      repeats: this.data.reas[12],
+      weight: this.data.weis[20],
+      sets: this.data.setArray[3],
+      value:[12,20,3],
     })
   },
   nameInputOver: function (e) {
@@ -103,9 +133,9 @@ Page({
       sets: null,
     };
     action.name = e.detail.value.name;
-    action.repeats = e.detail.value.repeats;
-    action.weight = e.detail.value.weight;
-    action.sets = e.detail.value.sets;
+    action.repeats = this.data.repeats;
+    action.weight = this.data.weight;
+    action.sets = this.data.sets;
     var actionList = this.data.actionList;
     console.log(action)
     if (editFlag == true) {
@@ -182,6 +212,7 @@ Page({
       repeats: action.repeats,
       weight: action.weight,
       sets: action.sets,
+      value:[action.repeats,action.weight/2.5,action.sets],
     })
   }
 

@@ -9,6 +9,19 @@ var sportHis = {
 }
 var timer
 var actLineArray = []
+const reas = []
+const weis = []
+
+for (let i = 0; i <= 30; i++) {
+  reas.push(i)
+}
+
+for (let i = 0; i <= 300; i += 2.5) {
+  weis.push(i)
+}
+
+
+
 Page({
 
   /**
@@ -25,6 +38,18 @@ Page({
     setnum: null,
     formHide: false,
     count: 0,
+
+    reas: reas,
+    weis: weis,
+    value: [1, 1],
+  },
+
+  bindChange: function (e) {
+    const val = e.detail.value
+    this.setData({
+      repeats: this.data.reas[val[0]],
+      weight: this.data.weis[val[1]],
+    })
   },
 
   /**
@@ -43,6 +68,7 @@ Page({
         sets: null,
         weight: null,
         hide: false,
+        color:"black"
       }
       actLine.name = planList.actionList[i].name;
       actLine.repeats = planList.actionList[i].repeats;
@@ -128,8 +154,8 @@ Page({
     };
     var setNum = this.data.setnum
     actionHistory.name = this.data.actionName;
-    actionHistory.repeats = e.detail.value.repeats
-    actionHistory.weight = e.detail.value.weight;
+    actionHistory.repeats = this.data.repeats
+    actionHistory.weight = this.data.weight;
     actionHistory.setnum = this.data.setnum;
     actHisList.push(actionHistory)
     console.log(setNum);
@@ -176,27 +202,33 @@ Page({
   actionConfirm: function () {
     var tempActionList = this.data.actionList;
     tempActionList[actionIndex].hide = true;
+    tempActionList[actionIndex].color = "lightgray";
     this.setData({
       hiddenmodalput: true,
       actionList: tempActionList,
       formHide: false,
     })
     console.log(this.data.actionList)
+    clearTimeout(timer);
   },
 
   startAction(e) {
-    console.log(e);
     var actionList = this.data.actionList;
     var action = actionList[e.currentTarget.dataset.index]
-    actionIndex = e.currentTarget.dataset.index
-    this.setData({
-      hiddenmodalput: false,
-      actionName: action.name,
-      repeats: action.repeats,
-      weight: action.weight,
-      sets: action.sets,
-      setnum: 1
-    })
+    if (action.hide != true) {
+      console.log(e);
+      actionIndex = e.currentTarget.dataset.index
+      this.setData({
+        hiddenmodalput: false,
+        actionName: action.name,
+        repeats: action.repeats,
+        weight: action.weight,
+        sets: action.sets,
+        setnum: 1,
+        value: [action.repeats, action.weight / 2.5]
+      })
+    }
+
   }
 
 })

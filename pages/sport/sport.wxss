@@ -10,7 +10,7 @@
   width: 100%;
 }
 .widget{
-  background: lightgoldenrodyellow;
+  background: ghostwhite;
   position: relative;
   margin-top: 25rpx;
   margin-bottom: 25rpx;
@@ -21,7 +21,7 @@
   padding-left: 40rpx;
   padding-right: 40rpx;
   border: #ddd 1px solid;
-  height: 150rpx;
+  height: 120rpx;
   width: 620rpx;
   box-shadow: 0rpx 10rpx 10rpx 0rpx darkgray ;
 }
@@ -54,11 +54,37 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 60rpx;
-  padding-top: 20rpx;
+  height: 50rpx;
+  padding-top: 10rpx;
 }
 .button{
   margin-top: 25rpx;
   margin-bottom: 25rpx;
   width: 680rpx;
+}
+.formView{
+   align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  font-size: 40rpx;
+  color: black;
+}
+.doingLine{
+    display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+   margin-top: 15rpx;
+  margin-bottom: 15rpx;
+}
+.line{
+  margin-top: 15rpx;
+  margin-bottom: 15rpx;
+}
+.modalButton{
+   margin-top: 15rpx;
+  margin-bottom: 15rpx;
+}
+.text{
+  width: 50%;
+  text-align: center;
 }
