@@ -7,16 +7,23 @@
   padding-top: 10rpx;
   padding-bottom: 10rpx;
   text-align: center;
+  width: 100%;
 }
 .widget{
+  background: lightgoldenrodyellow;
   position: relative;
-  margin-top: 5rpx;
-  margin-bottom: 5rpx;
+  margin-top: 25rpx;
+  margin-bottom: 25rpx;
+  margin-left: 25rpx;
+  margin-right: 20rpx;
   padding-top: 10rpx;
   padding-bottom: 10rpx;
   padding-left: 40rpx;
   padding-right: 40rpx;
-  border: #ddd 1px solid
+  border: #ddd 1px solid;
+  height: 150rpx;
+  width: 620rpx;
+  box-shadow: 0rpx 10rpx 10rpx 0rpx darkgray ;
 }
 .column{
   width:6rem;
@@ -35,4 +42,23 @@
 .countdown{
   text-align: center;
   font-size: 5rem;
+}
+
+.head{
+  font-size: 50rpx;
+  margin-top: 25rpx;
+  margin-bottom: 25rpx;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 60rpx;
+  padding-top: 20rpx;
+}
+.button{
+  margin-top: 25rpx;
+  margin-bottom: 25rpx;
+  width: 680rpx;
 }

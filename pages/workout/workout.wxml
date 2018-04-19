@@ -1,24 +1,42 @@
 <view class="container">
-<text>训练计划</text>
-<view class="widget">
-<text class="column">计划名称</text>
-<text class="link-column">操作</text>
-</view>
-  <scroll-view scoll-y="true">
-    <view class="widget">
-      <view wx:for="{{planList}}">
-        <text class='column'>{{item.name}}</text>
-        <view class='link-column'>
-        <navigator class="link" url="../sport/sport?actionId={{index}}" >开始</navigator>|
-        <navigator class="link" url="../operation/operation?actionId={{index}}" >编辑</navigator>|
-        <text class='link' bindtap='deletePlan' data-index="{{index}}">删除</text>
-        </view>
-        </view>
+  <view class='head'>
+    <view class='row'>
+      <view class="editIcon" bindtap="checkHis">
+        <image class="icon" src="/images/backup.png"></image>
+        <view class='editText'>历史</view>
+      </view>
+      <view>训练计划</view>
+      <view class="editIcon" bindtap="addPlan">
+        <image class="icon" src="/images/add.png"></image>
+        <view class='editText'>新增</view>
+      </view>
     </view>
-    
+  </view>
+  <scroll-view scoll-y="true">
+    <view class="widget" wx:for="{{planList}}">
+      <view class="row">
+        <view class="left">
+          <view class='column'>{{item.name}}</view>
+          <view class="edit">
+            <view class='row'>
+              <navigator class="editIcon" url="../operation/operation?actionId={{index}}">
+              <image class="icon" src="/images/edit.png"></image>
+                <view class='editText'>编辑</view>
+              </navigator>|
+              <view class="editIcon" bindtap='deletePlan' data-index="{{index}}">
+                <image class="icon" src="/images/trash.png"></image>
+                 <view class='editText'>删除</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="begin">
+          <navigator url="../sport/sport?actionId={{index}}">
+            <image class="bigicon" src="/images/play.png"></image>
+            <view >开始</view>
+            </navigator>
+        </view>
+      </view>
+    </view>
   </scroll-view>
-  <button class='button' bindtap="addPlan" type="primary">新增计划
-  </button>
-   <button class='button' bindtap="checkHis" type="primary">查看历史
-  </button>
 </view>

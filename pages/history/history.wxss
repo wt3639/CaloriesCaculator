@@ -47,3 +47,18 @@ page{
   background: #bf723e;
   color: white;
 }
+
+.widget{
+  position: relative;
+  margin-top: 5rpx;
+  margin-bottom: 5rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+.column{
+  width:7rem;
+  display: table-cell;
+  text-align: center
+}

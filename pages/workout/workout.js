@@ -74,11 +74,31 @@ Page({
   },
 
   deletePlan:function(e){
-    var planList = this.data.planList;
-    planList.splice(e.target.dataset.index,1)
-    wx.setStorageSync("planList", planList);
-    this.setData({
-      planList:planList,
+    var that = this;
+    wx.showModal({
+  title: '提示',
+  content: '是否删除该计划',
+  success: function(res) {
+    if (res.confirm) {
+      console.log('用户点击确定')
+      var planList = that.data.planList;
+      planList.splice(e.currentTarget.dataset.index, 1)
+      wx.setStorageSync("planList", planList);
+      that.setData({
+        planList: planList,
+      })
+    } else if (res.cancel) {
+      console.log('用户点击取消')
+    }
+  }
+})
+
+   
+  },
+
+  checkHis:function(){
+    wx.navigateTo({
+      url: '../history/history',
     })
   }
 })

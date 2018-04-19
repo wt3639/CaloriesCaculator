@@ -1,46 +1,43 @@
 <view class="container">
 
-<view>
-<text>计划名称:</text>
-   <text>{{planName}}</text>
-</view>
-<view class="widget">
-<text class="column">动作名称</text>
-<text class="column">每组次数</text>
-<text class="column">重量(kg)</text>
-<text class="column">组数</text>
-<text class="link-column">操作</text>
-</view>
+  <view>
+    <text class="head">{{planName}}</text>
+  </view>
   <scroll-view scoll-y="true">
-      <view class="widget" wx:for="{{actionList}}">
-        <text class="column">{{item.name}}</text>
-        <text class="column">{{item.repeats}}</text>
-        <text class="column">{{item.weight}}</text>
-        <text class="column">{{item.sets}}</text>
-        <view class="link-column">
-        <view class='link' hidden='{{item.hide}}' bindtap='startAction' data-index="{{index}}">开始</view>
-         <view hidden='{{!item.hide}}'>完成</view>
+    <view class="widget" wx:for="{{actionList}}">
+      <view bindtap='startAction' data-index="{{index}}">
+      <view class='row'>
+        <text>{{item.name}}</text>
+        <text hidden='{{!item.hide}}'>完成</text>
+      </view>
+        <view class='row'>
+          <text>每组次数:{{item.repeats}}</text>
+          <text>重量:{{item.weight}}kg</text>
+          <text>组数:{{item.sets}}</text>
         </view>
+      </view>
     </view>
   </scroll-view>
   <button class='button' bindtap="completePlan" type="primary">完成计划</button>
 
 </view>
 
-<modal  hidden="{{hiddenmodalput}}" title="完成情况" confirm-text="取消" no-cancel="true" bindconfirm="actionConfirm">
-<form class='formView' bindsubmit="formSubmit" bindreset="formReset">
-<view  hidden='{{formHide}}'> 
-<view>动作名称:{{actionName}}</view>
- <view>第{{setnum}}组</view>
-    <text>次数</text>  
-     <input  type='number' name="repeats" value="{{repeats}}" />  
-    <text>重量</text>
-      <input  type='digit' name="weight" value="{{weight}}"  />
-      <button class='button' bindtap='restComplete'type="primary">下一组</button>
-</view>
-<view class="countdown" hidden='{{!formHide}}'>{{count}}</view>
-       <button hidden='{{!formHide}}' class='button' form-type="submit" type="primary">休息完成</button>
+<modal hidden="{{hiddenmodalput}}" title="完成情况" confirm-text="完成本动作训练" bindconfirm="actionConfirm" bindcancel="actionCancel">
+  <form class='formView' bindsubmit="formSubmit" bindreset="formReset">
+    <view hidden='{{formHide}}'>
+      <view>动作名称:{{actionName}}</view>
+      <view>计划组数:{{sets}}</view>
+      <view>第{{setnum}}组</view>
+      <text>次数</text>
+      <input type='number' name="repeats" value="{{repeats}}" />
+      <text>重量</text>
+      <input type='digit' name="weight" value="{{weight}}" />
+      <button form-type="submit" type="primary">完成本组</button>
+    </view>
+    <text hidden='{{!formHide}}'>休息时间:</text>
+    <view class="countdown" hidden='{{!formHide}}'>{{count}}</view>
+    <button hidden='{{!formHide}}'  bindtap='restComplete' type="primary">下一组</button>
 
 
-</form>
+  </form>
 </modal>

@@ -2,13 +2,13 @@ var id = null;
 var editFlag = false;
 var actionIndex = null;
 var actHisList = [];
-var sportHis={
-  date:null,
-  planName:null,
-  complete:[]
+var sportHis = {
+  date: null,
+  planName: null,
+  complete: []
 }
 var timer
-var actLineArray=[]
+var actLineArray = []
 Page({
 
   /**
@@ -22,9 +22,9 @@ Page({
     repeats: null,
     weight: null,
     sets: null,
-    setnum:null,
-    formHide:false,
-    count:0,
+    setnum: null,
+    formHide: false,
+    count: 0,
   },
 
   /**
@@ -36,7 +36,7 @@ Page({
     var planList = wx.getStorageSync("planList")[options.actionId];
     id = options.actionId;
     //console.log(planList)
-    for(var i=0;i<planList.actionList.length;i++){
+    for (var i = 0; i < planList.actionList.length; i++) {
       var actLine = {
         name: null,
         repeats: null,
@@ -55,7 +55,7 @@ Page({
       actionList: actLineArray,
       planName: planList.name,
     })
-    sportHis.date=new Date();
+    sportHis.date = new Date().toLocaleString();
     sportHis.planName = planList.name;
   },
 
@@ -134,36 +134,22 @@ Page({
     actHisList.push(actionHistory)
     console.log(setNum);
     console.log(this.data.sets);
-    if (setNum==this.data.sets){
-      var tempActionList = this.data.actionList;
-      tempActionList[actionIndex].hide = true;
-      this.setData({
-        hiddenmodalput: true,
-        actionList:tempActionList,
-        formHide: false,
-      })
-     console.log(this.data.actionList)
-     
-    }else{
-      setNum++;
-      this.setData({
-        setnum:setNum,
-        formHide:false,
-      })
-    }
+    setNum++;
+    this.setData({
+      setnum: setNum,
+      formHide: true,
+      count: 0
+    })
+    clearTimeout(timer);
+    Countdown(this);
   },
 
-restComplete:function(){
-  this.setData({
-    formHide:true,
-  })
-  clearTimeout(timer);
-
-  this.setData({
-    count: 0
-  })
-  Countdown(this);
-},
+  restComplete: function () {
+    this.setData({
+      formHide: false,
+    })
+    clearTimeout(timer);
+  },
 
   completePlan: function () {
     sportHis.complete = actHisList;
@@ -174,20 +160,35 @@ restComplete:function(){
       url: '../workout/workout',
     })
   },
-  actionConfirm: function () {
+  actionCancel: function () {
     this.setData({
       hiddenmodalput: true,
       actionName: null,
       repeats: null,
       weight: null,
       sets: null,
+      count: 0,
+      formHide: false,
     })
+    clearTimeout(timer);
+  },
+
+  actionConfirm: function () {
+    var tempActionList = this.data.actionList;
+    tempActionList[actionIndex].hide = true;
+    this.setData({
+      hiddenmodalput: true,
+      actionList: tempActionList,
+      formHide: false,
+    })
+    console.log(this.data.actionList)
   },
 
   startAction(e) {
+    console.log(e);
     var actionList = this.data.actionList;
-    var action = actionList[e.target.dataset.index]
-    actionIndex = e.target.dataset.index
+    var action = actionList[e.currentTarget.dataset.index]
+    actionIndex = e.currentTarget.dataset.index
     this.setData({
       hiddenmodalput: false,
       actionName: action.name,
@@ -202,10 +203,16 @@ restComplete:function(){
 
 function Countdown(that) {
   var count = that.data.count;
+  if (count % 60 == 0 && count != 0) {
+    wx.vibrateLong({
+      success: console.log("vibrate")
+    })
+  }
+  console.log(count);
   count++;
   timer = setTimeout(function () {
     that.setData({
-      count:count
+      count: count
     });
     Countdown(that);
   }, 1000);

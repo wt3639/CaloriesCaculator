@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    recordArray: app.globalData.coffeeRecordArray,
+    recordArray: null,
     grindArray: ['粗粉', '中粉', '中细粉', '细粉', '极细粉'],
   },
 
@@ -29,8 +29,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var sportHistory = wx.getStorageSync("sportHistory")
     this.setData({
-      recordArray: app.globalData.coffeeRecordArray,
+      recordArray: sportHistory,
     })
   },
 

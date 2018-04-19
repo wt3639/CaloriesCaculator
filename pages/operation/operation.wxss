@@ -1,28 +1,31 @@
 .container{
   height: 100%;
-  display: table;
-  align-items: center;
-  justify-content: space-between;
   box-sizing: border-box;
   padding-top: 10rpx;
   padding-bottom: 10rpx;
-  text-align: center;
 }
 .widget{
+  background: lightgoldenrodyellow;
   position: relative;
-  margin-top: 5rpx;
-  margin-bottom: 5rpx;
+  margin-top: 25rpx;
+  margin-bottom: 25rpx;
   padding-top: 10rpx;
   padding-bottom: 10rpx;
-  padding-left: 40rpx;
-  padding-right: 40rpx;
-  border: #ddd 1px solid
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  border: #ddd 1px solid;
+  height: 150rpx;
+  box-shadow: 0rpx 10rpx 10rpx 0rpx darkgray ;
 }
 .column{
-  width:6rem;
-  display: table-cell
-}
 
+}
+.icon{
+  height: 40rpx;
+  width: 40rpx;
+  margin-right: 10rpx;
+   margin-top: 10rpx;
+}
 .link-column{
   width: 8rem;
   display: table-cell;
@@ -31,4 +34,35 @@
 .link{
   color:blue;
   display: inline-table;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 60rpx;
+  margin-top: 15rpx;
+  margin-bottom: 15rpx;
+}
+.input{
+  border-bottom: solid #ddd;
+  width: 680rpx;
+  text-align: center;
+  font-size: 45rpx;
+}
+
+
+.button{
+  margin-top: 25rpx;
+  margin-bottom: 25rpx;
+  width: 680rpx;
+}
+.editIcon{
+  height: 60rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.editText{
+ line-height: 60rpx;
 }

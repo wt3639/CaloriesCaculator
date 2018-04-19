@@ -6,7 +6,8 @@
     "pages/line/index",
     "pages/workout/workout",
     "pages/operation/operation",
-    "pages/sport/sport"
+    "pages/sport/sport",
+    "pages/history/history"
   ],
   "window": {
     "backgroundTextStyle": "light",

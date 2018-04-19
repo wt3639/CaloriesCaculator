@@ -1,34 +1,79 @@
 .container{
   height: 100%;
-  display: table;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
   padding-top: 10rpx;
   padding-bottom: 10rpx;
-  text-align: center;
 }
 .widget{
+  background: lightgoldenrodyellow;
   position: relative;
-  margin-top: 5rpx;
-  margin-bottom: 5rpx;
+  margin-top: 25rpx;
+  margin-bottom: 25rpx;
+  margin-left: 25rpx;
+  margin-right: 20rpx;
   padding-top: 10rpx;
   padding-bottom: 10rpx;
   padding-left: 40rpx;
   padding-right: 40rpx;
-  border: #ddd 1px solid
+  border: #ddd 1px solid;
+  height: 180rpx;
+  box-shadow: 0rpx 10rpx 10rpx 0rpx darkgray ;
 }
 .column{
-  width:4rem;
-  display: table-cell
+  width: 500rpx;
+  font-size: 50rpx;
 }
 
 .link-column{
   width: 12rem;
   display: table-cell;
+ 
 }
 
 .link{
   color:blue;
   display: inline-table;
 }
+
+.row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 60rpx;
+  padding-top: 20rpx;
+}
+
+.begin{
+  height:120rpx;
+  width: 120rpx;
+  text-align: center;
+}
+
+.head{
+  width: 680rpx;
+}
+.icon{
+  height: 40rpx;
+  width: 40rpx;
+  margin-right: 10rpx;
+  margin-top: 10rpx;
+}
+.edit{
+  width: 350rpx;
+}
+.bigicon{
+   height: 100rpx;
+    width: 100rpx;
+}
+.editIcon{
+  height: 50rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.editText{
+ line-height: 60rpx;
+}
+
