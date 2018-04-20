@@ -1,0 +1,37 @@
+<view class='mainView'>
+  <view class='row'>
+    <view class='mainHead'>本次训练记录</view>
+  </view>
+  <view>
+    <view class='info'>
+      <view class='row'>
+        <view class='head'>时间:</view>
+        <view class='context'>{{date}}</view>
+      </view>
+      <view class='row'>
+        <view class='head'>计划名称:</view>
+        <view class='context'>{{planName}}</view>
+      </view>
+      <view class='head'>完成情况:</view>
+      <view class="widget">
+        <text class="longColumn">动作名称</text>
+        <text class="shortColumn">组号</text>
+        <text class="shortColumn">次数</text>
+        <text class="column">重量</text>
+      </view>
+      <view wx:for="{{complete}}">
+        <view class="widget">
+          <view class='longColumn'>{{item.name}}</view>
+          <view class='shortColumn'>{{item.setnum}}</view>
+          <view class='shortColumn'>{{item.repeats}}</view>
+          <view class='column'>{{item.weight}}kg</view>
+        </view>
+      </view>
+    </view>
+  </view>
+   <button class='button' bindtap='saveImageShare' type="primary">保存图片分享</button>
+</view>
+
+
+<canvas  canvas-id="shareCanvas"></canvas>
+

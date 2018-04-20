@@ -31,7 +31,7 @@
       </view>
     </scroll-view>
     <view bindtap="addAction">
-      <image class="icon" src="/images/add.png"></image>新增
+      <image class="icon" src="/images/add.png"></image>新增动作
     </view>
     <button class='button' form-type="submit" type="primary">保存</button>
   </form>
@@ -39,10 +39,7 @@
 
 <modal hidden="{{hiddenmodalput}}" title="请输入动作" confirm-text="取消" no-cancel="true" bindconfirm="actionConfirm">
   <form class='formView' bindsubmit="formSubmit" bindreset="formReset">
-  <view class="doingLine">
-    <text class='text'>动作名称</text>
-    <input class="nameInput" type='text' name="name" value="{{actionName}}" />
-    </view>
+    <input class="nameInput" placeholder='请输入动作名称' type='text' name="name" value="{{actionName}}" />
     <view class="doingLine">
       <text class='text'>每组次数</text>
       <text class='text'>重量</text>

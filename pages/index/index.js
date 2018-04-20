@@ -142,11 +142,6 @@ Page({
     });
    
     },
-  workout:function(e){
-    wx.navigateTo({
-      url: '../workout/workout'
-    });
-  },
 
   formSubmit: function (e) {
     if (e.detail.value.height.length == 0 || e.detail.value.height < 0

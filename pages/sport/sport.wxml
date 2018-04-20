@@ -23,7 +23,7 @@
 
 </view>
 
-<modal hidden="{{hiddenmodalput}}" title="{{actionName}}" confirm-text="完成该动作" bindconfirm="actionConfirm" bindcancel="actionCancel">
+<modal hidden="{{hiddenmodalput}}" title="{{actionName}}" confirm-text="完成本动作" bindconfirm="actionConfirm" bindcancel="actionCancel">
   <form class='formView' bindsubmit="formSubmit" bindreset="formReset">
     <view hidden='{{formHide}}'>
       <view class='line'>第{{setnum}}/{{sets}}组</view>
@@ -46,7 +46,9 @@
     </view>
     <text hidden='{{!formHide}}'>休息时间:</text>
     <view class="countdown" hidden='{{!formHide}}'>{{count}}</view>
-    <button hidden='{{!formHide}}' bindtap='restComplete' type="primary">下一组</button>
-   
+    <button hidden='{{!formHide}}' bindtap='restComplete' type="{{completePlanHide ? 'primary' : 'warn'}}">{{completePlanHide ? '下一组' : '加一组'}}</button>
+     <view hidden='{{(completePlanHide)||(!formHide)}}'>已完成计划组数</view>
+     <view hidden='{{(completePlanHide)||(!formHide)}}'>如需加组点击"加一组"</view>
+     <view hidden='{{(completePlanHide)||(!formHide)}}'>结束点击"完成本动作"</view>
   </form>
 </modal>

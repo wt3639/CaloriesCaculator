@@ -38,7 +38,7 @@ Page({
     setnum: null,
     formHide: false,
     count: 0,
-
+    completePlanHide:true,
     reas: reas,
     weis: weis,
     value: [1, 1],
@@ -160,6 +160,16 @@ Page({
     actHisList.push(actionHistory)
     console.log(setNum);
     console.log(this.data.sets);
+    if(setNum>=this.data.sets){
+      this.setData({
+        completePlanHide:false,
+      })
+      console.log(this.data.completePlanHide);
+    }else{
+      this.setData({
+        completePlanHide: true,
+      })
+    }
     setNum++;
     this.setData({
       setnum: setNum,
@@ -182,8 +192,9 @@ Page({
     var sportHisList = wx.getStorageSync("sportHistory") || [];
     sportHisList.push(sportHis);
     wx.setStorageSync("sportHistory", sportHisList)
-    wx.navigateBack({
-      url: '../workout/workout',
+    let hisStr = JSON.stringify(sportHis.complete)
+    wx.navigateTo({
+      url: '../workresult/workresult?date=' + sportHis.date + "&planName=" + sportHis.planName + "&complete=" + hisStr,
     })
   },
   actionCancel: function () {
@@ -219,6 +230,7 @@ Page({
       console.log(e);
       actionIndex = e.currentTarget.dataset.index
       this.setData({
+        completePlanHide: true,
         hiddenmodalput: false,
         actionName: action.name,
         repeats: action.repeats,

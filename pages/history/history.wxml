@@ -2,9 +2,9 @@
   <view class='row'>
     <view class='mainHead'>训练历史</view>
   </view>
-  <view>
+  <view >
     <block wx:for="{{recordArray}}">
-      <view>
+      <view >
         <view class='info'>
           <view class='row'>
             <view class='head'>时间:</view>
@@ -14,19 +14,19 @@
             <view class='head'>计划名称:</view>
             <view class='context'>{{item.planName}}</view>
           </view>
-          <view class='head'>动作完成情况:</view>
+          <view class='head'>完成情况:</view>
           <view class="widget">
-                <text class="column">动作名称</text>
-                <text class="column">组号</text>
-                <text class="column">每组次数</text>
-                <text class="column">重量(kg)</text>
+                <text class="longColumn">动作名称</text>
+                <text class="shortColumn">组号</text>
+                <text class="shortColumn">次数</text>
+                <text class="column">重量</text>
               </view>
           <view wx:for="{{item.complete}}">
             <view class="widget">
-              <view class='column'>{{item.name}}</view>
-              <view class='column'>{{item.setnum}}</view>
-              <view class='column'>{{item.repeats}}</view>
-              <view class='column'>{{item.weight}}</view>
+              <view class='longColumn'>{{item.name}}</view>
+              <view class='shortColumn'>{{item.setnum}}</view>
+              <view class='shortColumn'>{{item.repeats}}</view>
+              <view class='column'>{{item.weight}}kg</view>
             </view>
           </view>
         </view>

@@ -4,9 +4,6 @@
   <!--第一行-->
     <view class="r1">
       <view class="r1c1">
-          <view class='r1c1r1'>
-            <text class="head">姓名</text>
-          </view>
           <view class='r1c1r2'>
              <text class="head">性别</text>
           </view>
@@ -15,9 +12,6 @@
           </view>
       </view>
       <view class="r1c2">
-        <view class='r1c2r1'>
-          <text class="head">{{userInfo.nickName}}</text>
-        </view>
         <view class='r1c2r2'>
           <radio-group class='radio'  name='sex'>
             <label wx:for="{{sex}}">
@@ -31,6 +25,7 @@
       </view>
       <view class="r1c3">
         <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <text class="head">{{userInfo.nickName}}</text>
       </view>
     </view>
   
@@ -133,6 +128,4 @@
 </view>
       <button class='button' form-type="submit" type="primary">查看结果</button>
   </form>
-<button class='button' bindtap="chart" type="primary">身体档案</button>
-<button class='button' bindtap="workout" type="primary">训练计划</button>
 </view>

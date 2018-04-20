@@ -123,6 +123,14 @@ Page({
 
   formSubmit: function (e) {
     console.log(e)
+    if(e.detail.value.name==""){
+      wx.showToast({
+        title: '请填入动作名称',
+        icon: 'success',
+        duration: 2000
+      })
+      return;
+    }
     this.setData({
       hiddenmodalput: true,
     })
@@ -162,6 +170,14 @@ Page({
     })
   },
   planSubmit: function (e) {
+    if (e.detail.value.planName == "") {
+      wx.showToast({
+        title: '请填入计划名称',
+        icon: 'success',
+        duration: 2000
+      })
+      return;
+    }
     var planList = wx.getStorageSync("planList") || [];
     var plan = {
       name: null,

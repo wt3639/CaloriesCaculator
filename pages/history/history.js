@@ -8,7 +8,6 @@ Page({
    */
   data: {
     recordArray: null,
-    grindArray: ['粗粉', '中粉', '中细粉', '细粉', '极细粉'],
   },
 
   /**
