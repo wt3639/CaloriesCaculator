@@ -81,10 +81,16 @@
   margin-bottom: 15rpx;
 }
 .modalButton{
-   margin-top: 15rpx;
-  margin-bottom: 15rpx;
+   margin-top: 20rpx;
+  margin-bottom: 20rpx;
 }
 .text{
   width: 50%;
   text-align: center;
+}
+.bottomFix{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
 }

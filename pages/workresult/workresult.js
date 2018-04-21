@@ -11,6 +11,7 @@ Page({
     planName:null,
     complete:[],
     hiddenmodal:true,
+    canvasHeight:0,
   },
 
   /**
@@ -22,6 +23,7 @@ Page({
         date: options.date,
         planName: options.planName,
         complete:JSON.parse(options.complete),
+        canvasHeight: 450 +JSON.parse(options.complete).length*30
       })
   },
 
@@ -82,25 +84,31 @@ Page({
     })
       const ctx = wx.createCanvasContext('shareCanvas')
       // 底图
-      var ctxHeight = 500 + this.data.complete.length*10;
-      ctx.drawImage("../../images/back.jpg", 0, 0, 400, ctxHeight)
+      var ctxHeight = 450 + this.data.complete.length*30;
+      ctx.setFillStyle('#242c2e')  
+      ctx.fillRect(0, 0, 400, ctxHeight)
+      ctx.drawImage("../../images/bell.jpg", 150, 0, 100, 100)
       // 作者名称
       ctx.setTextAlign('left')    // 文字居中
-      ctx.setFillStyle('#000000')  // 文字颜色：黑色
+      ctx.setFillStyle('#ffffff')  // 文字颜色：黑色
       ctx.setFontSize(20)         // 文字字号：22px
-      ctx.fillText("日期:"+this.data.date, 50, 100)
-      ctx.fillText("计划名称:" + this.data.planName, 50, 120)
-      ctx.fillText("完成情况:", 50, 150)
+      ctx.fillText("日期: "+this.data.date, 50, 110)
+      ctx.fillText("计划名称: " + this.data.planName, 50, 140)
+      ctx.fillText("完成情况:", 50, 170)
+      ctx.fillText("动作名称", 50, 200 )
+      ctx.fillText("组号", 200, 200 )
+      ctx.fillText("次数", 250, 200 )
+      ctx.fillText("重量", 300, 200 )
       for(let i=0;i<this.data.complete.length;i++){
-        ctx.fillText(this.data.complete[i].name, 50, 180+30*i)
-        ctx.fillText(this.data.complete[i].setnum, 200, 180 + 30 * i)
-        ctx.fillText(this.data.complete[i].repeats, 250, 180 + 30 * i)
-        ctx.fillText(this.data.complete[i].weight+"kg",300 , 180 + 30 * i)
+        ctx.fillText(this.data.complete[i].name, 50, 230+30*i)
+        ctx.fillText(this.data.complete[i].setnum, 200, 230 + 30 * i)
+        ctx.fillText(this.data.complete[i].repeats, 250, 230 + 30 * i)
+        ctx.fillText(this.data.complete[i].weight+"kg",300 , 230 + 30 * i)
       }
       
       // 小程序码
       const qrImgSize = 180
-      ctx.drawImage("../../images/lego.jpg", (350 - qrImgSize) / 2, ctxHeight-qrImgSize, qrImgSize, qrImgSize)
+      ctx.drawImage("../../images/lego.jpg", (400 - qrImgSize) / 2, ctxHeight-qrImgSize, qrImgSize, qrImgSize)
       ctx.stroke()
       ctx.draw(false,function(){
         console.log("draw callback")

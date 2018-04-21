@@ -4,7 +4,7 @@
   </view>
   <view >
     <block wx:for="{{recordArray}}">
-      <view >
+      <view bindtap='hisView' data-index="{{index}}">
         <view class='info'>
           <view class='row'>
             <view class='head'>时间:</view>

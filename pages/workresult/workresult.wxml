@@ -33,5 +33,5 @@
 </view>
 
 
-<canvas  canvas-id="shareCanvas"></canvas>
+<canvas  canvas-id="shareCanvas" style="width: 400px; height: {{canvasHeight}}px"></canvas>
 

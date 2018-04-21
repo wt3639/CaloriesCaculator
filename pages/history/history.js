@@ -67,5 +67,15 @@ Page({
    */
   onShareAppMessage: function () {
     
+  },
+  hisView:function(e){
+    var clickHis = this.data.recordArray[e.currentTarget.dataset.index];
+    var date = clickHis.date;
+    var planName = clickHis.planName;
+    var complete = JSON.stringify(clickHis.complete)
+    wx.navigateTo({
+      url: '../workresult/workresult?date='+date+"&planName="+planName+"&complete="+complete,
+    })
+    
   }
 })
