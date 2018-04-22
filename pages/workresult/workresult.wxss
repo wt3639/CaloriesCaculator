@@ -71,3 +71,11 @@
   display: table-cell;
   text-align: center
 }
+
+.modalView{
+  
+}
+
+.imageView{
+ width: 100%;
+}

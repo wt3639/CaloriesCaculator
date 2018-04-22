@@ -35,5 +35,5 @@
   </view>
   <switch class="switch" type='checkbox' bindchange="hidePrivate" /><text class="share">分享时隐藏身高体重数据</text>
   <button class='button' open-type="share" type="primary">分享给好友</button>
-  <view class="ad" bindtap="bindAdWindow">蛋白质吃不够怎么办？点我试试</view>
+<!--  <view class="ad" bindtap="bindAdWindow">蛋白质吃不够怎么办？点我试试</view>-->
 </view>

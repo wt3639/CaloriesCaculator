@@ -12,6 +12,10 @@
         <view class='head'>计划名称:</view>
         <view class='context'>{{planName}}</view>
       </view>
+      <view class='row'>
+        <view class='head'>总耗时:</view>
+        <view class='context'>{{sumTime}}</view>
+      </view>
       <view class='head'>完成情况:</view>
       <view class="widget">
         <text class="longColumn">动作名称</text>
@@ -29,9 +33,12 @@
       </view>
     </view>
   </view>
-   <button class='button' bindtap='saveImageShare' type="primary">保存图片分享</button>
+   <button class='button' bindtap='saveImageShare' type="primary">生成图片分享</button>
 </view>
 
 
-<canvas  canvas-id="shareCanvas" style="width: 400px; height: {{canvasHeight}}px"></canvas>
+<canvas canvas-id="shareCanvas" style="width: 400px; height: {{canvasHeight}}px;position:fixed;left:10000px;top:10000px;"></canvas>
 
+<modal class="modalView" hidden="{{hiddenmodal}}" title="分享训练成果" confirm-text="保存" bindconfirm="picConfirm" bindcancel="picCancel">
+<image class="imageView" src='{{imageSrc}}'mode="aspectFit" ></image>
+</modal>

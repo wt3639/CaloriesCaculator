@@ -5,6 +5,7 @@ var actHisList = [];
 var sportHis = {
   date: null,
   planName: null,
+  sumTime:null,
   complete: []
 }
 var timer
@@ -20,7 +21,7 @@ for (let i = 0; i <= 300; i += 2.5) {
   weis.push(i)
 }
 
-
+var startTime;
 
 Page({
 
@@ -83,6 +84,7 @@ Page({
     })
     sportHis.date = new Date().toLocaleString();
     sportHis.planName = planList.name;
+    startTime= new Date().getTime();
   },
 
   /**
@@ -189,12 +191,19 @@ Page({
 
   completePlan: function () {
     sportHis.complete = actHisList;
+    var SumTime = new Date().getTime()-startTime;
+    sportHis.sumTime = SumTime;
+    var SumHour = parseInt(SumTime / 3600000);
+    var SumMin = parseInt(SumTime%3600000/60000);
+    var SumSec = Math.round(SumTime%60000/1000);
+    var sumTimeStr = SumHour + "时" + SumMin + "分" + SumSec + "秒";
+    console.log(sumTimeStr);
     var sportHisList = wx.getStorageSync("sportHistory") || [];
     sportHisList.push(sportHis);
     wx.setStorageSync("sportHistory", sportHisList)
     let hisStr = JSON.stringify(sportHis.complete)
-    wx.navigateTo({
-      url: '../workresult/workresult?date=' + sportHis.date + "&planName=" + sportHis.planName + "&complete=" + hisStr,
+    wx.redirectTo({
+      url: '../workresult/workresult?date=' + sportHis.date + "&planName=" + sportHis.planName + "&complete=" + hisStr+"&sumTime="+SumTime,
     })
   },
   actionCancel: function () {

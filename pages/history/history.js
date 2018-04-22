@@ -1,5 +1,5 @@
 const app = getApp();
-
+var sportHistory;
 
 Page({
 
@@ -28,9 +28,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var sportHistory = wx.getStorageSync("sportHistory")
+    sportHistory = wx.getStorageSync("sportHistory")
     this.setData({
-      recordArray: sportHistory,
+      recordArray: [].concat(sportHistory).reverse() ,
     })
   },
 
@@ -73,9 +73,31 @@ Page({
     var date = clickHis.date;
     var planName = clickHis.planName;
     var complete = JSON.stringify(clickHis.complete)
+    var sumTime = clickHis.sumTime
     wx.navigateTo({
-      url: '../workresult/workresult?date='+date+"&planName="+planName+"&complete="+complete,
+      url: '../workresult/workresult?date='+date+"&planName="+planName+"&complete="+complete+"&sumTime="+sumTime,
     })
     
-  }
+  },
+
+    deleteAction: function (e) {
+    var that = this;
+    wx.showModal({
+      title: '提示',
+      content: '是否删除该条训练历史',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          sportHistory.splice(sportHistory.length-e.currentTarget.dataset.index-1, 1)
+          wx.setStorageSync("sportHistory", sportHistory)
+          that.setData({
+            recordArray: [].concat(sportHistory).reverse(),
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+
+  },
 })

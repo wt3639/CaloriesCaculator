@@ -12,6 +12,8 @@ Page({
     complete:[],
     hiddenmodal:true,
     canvasHeight:0,
+    imageSrc:null,
+    sumTime:null,
   },
 
   /**
@@ -19,11 +21,18 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+    var SumTime = options.sumTime;
+    var SumHour = parseInt(SumTime / 3600000);
+    var SumMin = parseInt(SumTime % 3600000 / 60000);
+    var SumSec = Math.round(SumTime % 60000 / 1000);
+    var sumTimeStr = SumHour + "时" + SumMin + "分" + SumSec + "秒";
+    console.log(sumTimeStr);
       this.setData({
         date: options.date,
         planName: options.planName,
         complete:JSON.parse(options.complete),
-        canvasHeight: 450 +JSON.parse(options.complete).length*30
+        canvasHeight: 450 +JSON.parse(options.complete).length*30,
+        sumTime: sumTimeStr,
       })
   },
 
@@ -79,9 +88,7 @@ Page({
 
   },
   saveImageShare:function(){
-    this.setData({
-      hiddenmodal: false,
-    })
+    var that = this;
       const ctx = wx.createCanvasContext('shareCanvas')
       // 底图
       var ctxHeight = 450 + this.data.complete.length*30;
@@ -92,18 +99,18 @@ Page({
       ctx.setTextAlign('left')    // 文字居中
       ctx.setFillStyle('#ffffff')  // 文字颜色：黑色
       ctx.setFontSize(20)         // 文字字号：22px
-      ctx.fillText("日期: "+this.data.date, 50, 110)
-      ctx.fillText("计划名称: " + this.data.planName, 50, 140)
-      ctx.fillText("完成情况:", 50, 170)
-      ctx.fillText("动作名称", 50, 200 )
-      ctx.fillText("组号", 200, 200 )
-      ctx.fillText("次数", 250, 200 )
-      ctx.fillText("重量", 300, 200 )
+      ctx.fillText("日期: "+this.data.date, 50, 120)
+      ctx.fillText("计划名称: " + this.data.planName, 50, 150)
+      ctx.fillText("完成情况:", 50, 180)
+      ctx.fillText("动作名称", 50, 210 )
+      ctx.fillText("组号", 200, 210 )
+      ctx.fillText("次数", 250, 210 )
+      ctx.fillText("重量", 300, 210 )
       for(let i=0;i<this.data.complete.length;i++){
-        ctx.fillText(this.data.complete[i].name, 50, 230+30*i)
-        ctx.fillText(this.data.complete[i].setnum, 200, 230 + 30 * i)
-        ctx.fillText(this.data.complete[i].repeats, 250, 230 + 30 * i)
-        ctx.fillText(this.data.complete[i].weight+"kg",300 , 230 + 30 * i)
+        ctx.fillText(this.data.complete[i].name, 50, 240+30*i)
+        ctx.fillText(this.data.complete[i].setnum, 200, 240 + 30 * i)
+        ctx.fillText(this.data.complete[i].repeats, 250, 240 + 30 * i)
+        ctx.fillText(this.data.complete[i].weight+"kg",300 , 240 + 30 * i)
       }
       
       // 小程序码
@@ -117,12 +124,30 @@ Page({
           fileType: 'jpg',
           success: function(res){
             console.log(res.tempFilePath)
-            wx.saveImageToPhotosAlbum({
-              filePath: res.tempFilePath,
+            that.setData({
+              hiddenmodal: false,
+              imageSrc:res.tempFilePath
             })
           }
         })
         }
       )
   },
+
+  picConfirm:function(){
+    var that= this;
+    wx.saveImageToPhotosAlbum({
+      filePath: that.data.imageSrc,
+    })
+    that.setData({
+      hiddenmodal: true,
+    })
+  },
+
+  picCancel:function(){
+    var that =  this;
+    that.setData({
+      hiddenmodal: true,
+    })
+  }
 })

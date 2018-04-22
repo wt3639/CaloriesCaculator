@@ -8,7 +8,8 @@
     "pages/operation/operation",
     "pages/sport/sport",
     "pages/history/history",
-    "pages/workresult/workresult"
+    "pages/workresult/workresult",
+    "pages/user/user"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -32,6 +33,12 @@
         "iconPath": "images/work_gray.png",
         "pagePath": "pages/workout/workout",
         "text": "训练计划"
+      },
+      {
+        "selectedIconPath": "images/user.png",
+        "iconPath": "images/user_gray.png",
+        "pagePath": "pages/user/user",
+        "text": "我"
       }
     ]
   }
