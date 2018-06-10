@@ -1,61 +1,69 @@
 <view class="container">
-
-  <view>
-    <text class="head">{{planName}}</text>
-  </view>
-  <scroll-view scoll-y="true">
-    <view class="widget" wx:for="{{actionList}}">
-      <view style="color:{{item.color}}" bindtap='startAction' data-index="{{index}}">
-        <view class='row'>
-          <text>{{item.name}}</text>
-          <text hidden='{{item.hide}}'>未完成</text>
-          <text hidden='{{!item.hide}}'>完成</text>
-        </view>
-        <view class='row'>
-          <text>每组次数:{{item.repeats}}</text>
-          <text>重量:{{item.weight}}kg</text>
-          <text>组数:{{item.sets}}</text>
+  <view hidden='{{!hiddenmodalput}}'>
+    <view>
+      <text class="head">{{planName}}</text>
+    </view>
+    <scroll-view scoll-y="true">
+      <view class="widget" wx:for="{{actionList}}">
+        <view style="color:{{item.color}}" bindtap='startAction' data-index="{{index}}">
+          <view class='row'>
+            <text>{{item.name}}</text>
+            <text hidden='{{item.hide}}'>未完成</text>
+            <text hidden='{{!item.hide}}'>完成</text>
+          </view>
+          <view class='row'>
+            <text>每组次数:{{item.repeats}}</text>
+            <text>重量:{{item.weight}}kg</text>
+            <text>组数:{{item.sets}}</text>
+          </view>
         </view>
       </view>
-    </view>
-  </scroll-view>
-  <button class='button' bindtap="completePlan" type="primary">结束训练</button>
+    </scroll-view>
+    <button class='button' bindtap="completePlan" type="primary">结束训练</button>
 
-</view>
+  </view>
 
-<modal class="bottomFix" hidden="{{hiddenmodalput}}" title="{{actionName}}" confirm-text="完成本动作" bindconfirm="actionConfirm" bindcancel="actionCancel">
-  <form class='formView' bindsubmit="formSubmit" bindreset="formReset">
-  
-    <view hidden='{{formHide}}'>
-   
-      <view class='line'>第{{setnum}}/{{sets}}组</view>
-      <view class='doingLine'>
-        <text class='text'>次数</text>
-        <text class='text'>重量</text>
+  <view hidden="{{hiddenmodalput}}">
+    <form class='formView' bindsubmit="formSubmit" bindreset="formReset">
+      <text class="head">{{actionName}}</text>
+
+
+      <view hidden='{{formHide}}'>
+
+        <view class='line'>第{{setnum}}/{{sets}}组</view>
+        <view class='doingLine'>
+          <text class='text'>次数</text>
+          <text class='text'>重量</text>
+        </view>
+        <view style=';'>
+          <picker-view indicator-style="height: 50px;" style="width: 100%; height: 350rpx;" value="{{value}}" bindchange="bindChange">
+            <picker-view-column>
+              <view wx:for="{{reas}}" style="line-height: 50px ;text-align: center;">{{item}}</view>
+            </picker-view-column>
+            <picker-view-column>
+              <view wx:for="{{weis}}" style="line-height: 50px;text-align: center;">{{item}}kg</view>
+            </picker-view-column>
+          </picker-view>
+          <button class="modalButton" form-type="submit" type="primary">完成本组</button>
+        </view>
+
+
       </view>
       <view>
-        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 350rpx;" value="{{value}}" bindchange="bindChange">
-          <picker-view-column>
-            <view wx:for="{{reas}}" style="line-height: 50px ;text-align: center;">{{item}}</view>
-          </picker-view-column>
-          <picker-view-column>
-            <view wx:for="{{weis}}" style="line-height: 50px;text-align: center;">{{item}}kg</view>
-          </picker-view-column>
-        </picker-view>
-         <button class="modalButton" form-type="submit" type="primary">完成本组</button>
-      </view>
-      
-      
-    </view>
-    <view>
-    
-    <text hidden='{{!formHide}}'>休息时间:</text>
-    <view class="countdown" hidden='{{!formHide}}'>{{count}}</view>
-    <button hidden='{{!formHide}}' bindtap='restComplete' type="{{completePlanHide ? 'primary' : 'warn'}}">{{completePlanHide ? '下一组' : '加一组'}}</button>
-     <view hidden='{{(completePlanHide)||(!formHide)}}'>已完成计划组数</view>
-     <view hidden='{{(completePlanHide)||(!formHide)}}'>如需加组点击"加一组"</view>
-     <view hidden='{{(completePlanHide)||(!formHide)}}'>结束点击"完成本动作"</view>
+
+        <text hidden='{{!formHide}}'>休息时间:</text>
+        <view class="countdown" hidden='{{!formHide}}'>{{count}}</view>
      
+        <view hidden='{{(completePlanHide)||(!formHide)}}'>已完成计划组数</view>
+        <view hidden='{{(completePlanHide)||(!formHide)}}'>如需加组点击"加一组"</view>
+        <view hidden='{{(completePlanHide)||(!formHide)}}'>结束点击"完成本动作"</view>
+           <button hidden='{{!formHide}}' bindtap='restComplete' type="{{completePlanHide ? 'primary' : 'warn'}}">{{completePlanHide ? '下一组' : '加一组'}}</button>
+      </view>
+    </form>
+    <view class="headRow">
+      <button class="bottomButton" bindtap='actionCancel' type="default">取消</button>
+    <button class="bottomButton" bindtap='actionConfirm' type="primary">完成本动作</button>
     </view>
-  </form>
-</modal>
+  
+  </view>
+</view>
