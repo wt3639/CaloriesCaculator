@@ -26,6 +26,8 @@ for (let i = 0; i <= 300; i += 2.5) {
 }
 var worker=null;
 var startTime;
+var countStartTime;
+var vibrateTimer;
 
 Page({
 
@@ -184,30 +186,33 @@ Page({
     if(worker){
       worker.terminate();
     }
-    //Countdown(this);
-    worker = wx.createWorker('workers/request/index.js') // 文件名指定 worker 的入口文件路径，绝对路径
-    worker.postMessage({
-      obj: this
-    })
-    var that = this;
-    worker.onMessage(function (res) {
-      var count = res.back;
-      if (count % 60 == 0 && count != 0) {
-        wx.vibrateLong({
-          success: console.log("vibrate")
-        })
-      }
-      that.setData({
-        count: count
-      });
-    })
+    countStartTime = new Date().getTime();
+    Countdown(this);
+    // vibrateCountdown(this);
+    // worker = wx.createWorker('workers/request/index.js') // 文件名指定 worker 的入口文件路径，绝对路径
+    // worker.postMessage({
+    //   obj: this
+    // })
+    // var that = this;
+    // worker.onMessage(function (res) {
+    //   var count = res.back;
+    //   if (count % 60 == 0 && count != 0) {
+    //     wx.vibrateLong({
+    //       success: console.log("vibrate")
+    //     })
+    //   }
+    //   that.setData({
+    //     count: count
+    //   });
+    // })
   },
 
   restComplete: function () {
     this.setData({
       formHide: false,
     })
-    worker.terminate()
+    // worker.terminate()
+    clearTimeout(timer);
   },
 
   
@@ -221,7 +226,8 @@ Page({
       count: 0,
       formHide: false,
     })
-    worker.terminate()
+    // worker.terminate()
+    clearTimeout(timer);
   },
 
   actionConfirm: function () {
@@ -236,7 +242,8 @@ Page({
     console.log(actionHistory)
     actHisList.push(actionHistory);
     console.log(actHisList)
-    worker.terminate()
+    // worker.terminate()
+    clearTimeout(timer);
   },
 
   startAction(e) {
@@ -285,7 +292,7 @@ Page({
 })
 
 function Countdown(that) {
-  var count = that.data.count;
+  var count = parseInt((new Date().getTime() - countStartTime)/1000);
   if (count % 60 == 0 && count != 0) {
     wx.vibrateLong({
       success: console.log("vibrate")
@@ -300,3 +307,13 @@ function Countdown(that) {
     Countdown(that);
   }, 1000);
 };
+
+// function vibrateCountdown(that) {
+//   wx.vibrateLong({
+//     success: console.log("vibrate")
+//   })
+//   vibrateTimer = setTimeout(function () {
+//     vibrateCountdown(that);
+//   }, 60000);
+ 
+// };
