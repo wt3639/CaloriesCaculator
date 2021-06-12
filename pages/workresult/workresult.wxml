@@ -30,6 +30,7 @@
     </view>
   </view>
   <button class='button' bindtap='saveImageShare' type="primary">生成图片分享</button>
+  <ad unit-id="adunit-ee110f385e618271"></ad>
 </view>
 
 

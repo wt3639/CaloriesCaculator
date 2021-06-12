@@ -33,4 +33,5 @@
 
   </view>
   <button class='button' bindtap="getMy" type="primary">获取我的热量摄入表</button>
+  <ad unit-id="adunit-ee110f385e618271"></ad>
 </view>

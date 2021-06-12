@@ -2,8 +2,9 @@
 <view class="mainView">
   <view class="upHalf" style="flex-direction:row">
     <view class="userinfo">
+     <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo" hidden="{{loginHide}}">登录</button>
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <text class="userinfo-nickname" >{{userInfo.nickName}}</text>
     </view>
     <view class="basicInfo">
       <view class="height">身高: {{height}}cm</view>
@@ -33,7 +34,11 @@
     </view>
 
   </view>
+  
   <switch class="switch" type='checkbox' bindchange="hidePrivate" /><text class="share">分享时隐藏身高体重数据</text>
   <button class='button' open-type="share" type="primary">分享给好友</button>
+   <button class="pinkbutton" bindtap="support" >如果喜欢这个小程序，请支持一下！</button>
+     <!--<button class='button' bindtap='redictToHistory' type="primary">查看身体数据历史记录</button>--> 
+  <ad unit-id="adunit-aab64672d8a6ad48"></ad>
 <!--  <view class="ad" bindtap="bindAdWindow">蛋白质吃不够怎么办？点我试试</view>-->
 </view>

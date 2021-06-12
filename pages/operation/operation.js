@@ -52,7 +52,7 @@ Page({
       console.log(planList)
       this.setData({
         actionList: planList.actionList,
-        planName: planList.name,
+        planName: planList.planName,
       })
     }else{
       id=null;
@@ -135,15 +135,15 @@ Page({
       hiddenmodalput: true,
     })
     var action = {
-      name: null,
-      repeats: null,
-      weight: null,
-      sets: null,
+      actionName: null,
+      actionRepeat: null,
+      actionWeight: null,
+      actionSet: null,
     };
-    action.name = e.detail.value.name;
-    action.repeats = this.data.repeats;
-    action.weight = this.data.weight;
-    action.sets = this.data.sets;
+    action.actionName = e.detail.value.name;
+    action.actionRepeat = this.data.repeats;
+    action.actionWeight = this.data.weight;
+    action.actionSet = this.data.sets;
     var actionList = this.data.actionList;
     console.log(action)
     if (editFlag == true) {
@@ -160,6 +160,7 @@ Page({
       sets: null,
     })
   },
+  
   actionConfirm: function () {
     this.setData({
       hiddenmodalput: true,
@@ -180,9 +181,9 @@ Page({
     }
     var planList = wx.getStorageSync("planList") || [];
     var plan = {
-      name: null,
+      planName: null,
     };
-    plan.name = e.detail.value.planName;
+    plan.planName = e.detail.value.planName;
     plan.actionList = this.data.actionList;
     console.log(plan)
     if (id == null) {
@@ -224,10 +225,10 @@ Page({
     actionIndex = e.currentTarget.dataset.index
     this.setData({
       hiddenmodalput: false,
-      actionName: action.name,
-      repeats: action.repeats,
-      weight: action.weight,
-      sets: action.sets,
+      actionName: action.actionName,
+      repeats: action.actionRepeat,
+      weight: action.actionWeight,
+      sets: action.actionSet,
       value:[action.repeats,action.weight/2.5,action.sets],
     })
   }

@@ -1,32 +1,32 @@
 <!--index.wxml-->
 <view class="mainView">
+<ad unit-id="adunit-1df45ee625a327ec" ad-type="grid" grid-opacity="0.8" grid-count="5" ad-theme="white"></ad>
+<button class="pinkbutton" bindtap="helpVideo" >{{opencloseHelp}}</button>
+<video id="helpvideo1" class="helpvideo" src="cloud://calories-webtest-efd9c7.6361-calories-webtest-efd9c7-1254249941/a3af447103765afb757540367833e2a7.mp4" ad-unit-id="adunit-ec4e57a27f82b0b9" hidden="{{helpHidden}}"></video>
   <form class='formView' bindsubmit="formSubmit" bindreset="formReset">
   <!--第一行-->
     <view class="r1">
       <view class="r1c1">
-          <view class='r1c1r2'>
              <text class="head">性别</text>
-          </view>
-          <view class='r1c1r3'>
-             <text class="head">年龄</text>
-          </view>
+          
       </view>
       <view class="r1c2">
-        <view class='r1c2r2'>
           <radio-group class='radio'  name='sex'>
             <label wx:for="{{sex}}">
               <radio  id="{{item.name}}" value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
               </label>
             </radio-group>
-        </view>
-        <view class='r1c2r3'>
-          <input class="input" type="number" id="age" name="age" placeholder="year" value="{{age}}" />
-        </view>
       </view>
-      <view class="r1c3">
-        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-        <text class="head">{{userInfo.nickName}}</text>
-      </view>
+      <view class='r1c3'>
+             <text class="head">年龄</text>
+          </view>
+        <view class='r1c4'>
+         <input class="input" type="number" id="age" name="age" placeholder="year" value="{{age}}" />
+        </view>
+      <!-- <view class="r1c3">
+         <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image> 
+         <text class="head">{{userInfo.nickName}}</text> 
+      </view> -->
     </view>
   
   <!--第二行-->
@@ -126,6 +126,11 @@
     <slider name="getProt" bindchange="bindProtChange"  min="1000" max="3500" step='50'  value="{{getProt}}" show-value/>
   </view>
 </view>
+<!-- <switch class="switch" type='checkbox' bindchange="saveWeight" checked='{{saveWeightChecked}}'/><text class="share">记录本次身体数据</text>-->
+ 
       <button class='button' form-type="submit" type="primary">查看结果</button>
   </form>
+  <button class="pinkbutton" bindtap="support" >如果喜欢这个小程序，请支持一下！</button>
+  <button class='button' type='warn' open-type='feedback' >意见反馈</button>
+  <ad unit-id="adunit-ee110f385e618271"></ad>
 </view>

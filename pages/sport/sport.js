@@ -50,6 +50,7 @@ Page({
     weis: weis,
     value: [1, 1],
     planHide:false,
+    beginPlanBtnHide:false,
   },
 
   bindChange: function (e) {
@@ -78,19 +79,19 @@ Page({
         hide: false,
         color:"black"
       }
-      actLine.name = planList.actionList[i].name;
-      actLine.repeats = planList.actionList[i].repeats;
-      actLine.sets = planList.actionList[i].sets;
-      actLine.weight = planList.actionList[i].weight;
+      actLine.name = planList.actionList[i].actionName;
+      actLine.repeats = planList.actionList[i].actionRepeat;
+      actLine.sets = planList.actionList[i].actionSet;
+      actLine.weight = planList.actionList[i].actionWeight;
       actLineArray.push(actLine)
     }
     console.log(actLineArray)
     this.setData({
       actionList: actLineArray,
-      planName: planList.name,
+      planName: planList.planName,
     })
     sportHis.date = new Date().toLocaleString();
-    sportHis.planName = planList.name;
+    sportHis.planName = planList.planName;
     startTime= new Date().getTime();
   },
 
@@ -187,7 +188,11 @@ Page({
       worker.terminate();
     }
     countStartTime = new Date().getTime();
-    Countdown(this);
+    var that =this;
+    timer = setInterval(function () {
+      Countdown(that);
+    }, 1000);
+    //Countdown(this);
     // vibrateCountdown(this);
     // worker = wx.createWorker('workers/request/index.js') // 文件名指定 worker 的入口文件路径，绝对路径
     // worker.postMessage({
@@ -271,6 +276,36 @@ Page({
     }
 
   },
+  beginPlan(e) {
+    var actionList = this.data.actionList;
+    if(actionList!=null){
+      var action = actionList[0]
+      if (action.hide != true) {
+        console.log(e);
+        actionIndex = 0
+        actionHistory = {
+          name: null,
+          done: [],
+        };
+        actionHistory.name = action.name;
+        this.setData({
+          completePlanHide: true,
+          hiddenmodalput: false,
+          actionName: action.name,
+          repeats: action.repeats,
+          weight: action.weight,
+          sets: action.sets,
+          setnum: 1,
+          value: [action.repeats, action.weight / 2.5],
+          beginPlanBtnHide: true,
+        })
+        console.log(actionHistory)
+
+      }
+    }
+    
+
+  },
   completePlan: function () {
     sportHis.complete = actHisList;
     var SumTime = new Date().getTime() - startTime;
@@ -299,13 +334,11 @@ function Countdown(that) {
     })
   }
   console.log(count);
+  that.setData({
+    count: count
+  });
   count++;
-  timer = setTimeout(function () {
-    that.setData({
-      count: count
-    });
-    Countdown(that);
-  }, 1000);
+
 };
 
 // function vibrateCountdown(that) {

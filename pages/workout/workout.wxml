@@ -21,7 +21,7 @@
     <view class="widget" wx:for="{{planList}}">
       <view class="row">
         <view class="left">
-          <view class='column'>{{item.name}}</view>
+          <view class='column'>{{item.planName}}</view>
           <view class="edit">
             <view class='row'>
               <navigator class="editIcon" url="../operation/operation?actionId={{index}}">
@@ -44,4 +44,5 @@
       </view>
     </view>
   </scroll-view>
+  <ad unit-id="adunit-ee110f385e618271"></ad>
 </view>

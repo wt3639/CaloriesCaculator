@@ -1,6 +1,6 @@
 /**index.wxss**/
 .mainView{
-  margin:20rpx 20rpx 20rpx 20rpx;
+  margin:40rpx 20rpx 20rpx 20rpx;
   font-size: 40rpx;
 
 }
@@ -8,7 +8,7 @@
 .r1{
   display: flex;
   flex-direction: row;
-  height: 200rpx;
+  height: 100rpx;
   font-size: 40rpx;
   text-align: center;
   border: solid;
@@ -16,7 +16,7 @@
 }
 
 .r1c1{
-  width:150rpx;
+  width:200rpx;
   line-height: 100rpx;
   text-align: center;
 }
@@ -41,8 +41,10 @@
 }
 
 .r1c2{
-  width: 350rpx;
+  width: 400rpx;
  line-height: 100rpx;
+ border-style:none solid none solid;
+     border-color:darkgray;
 }
 
 .r1c2r1{
@@ -62,8 +64,15 @@
      border-color:darkgray;
 }
 .r1c3{
-  height: 310rpx;
-  width: 210rpx;
+  width: 300rpx;
+   line-height: 100rpx;
+  text-align: center;
+  border-style:none solid none none;
+  border-color:darkgray;
+}
+
+.r1c4{
+  width: 300rpx;
 }
 
 .userinfo-avatar {
@@ -287,4 +296,15 @@
 
 .button{
   margin-top: 10rpx;
+}
+
+.pinkbutton{
+  margin-top: 10rpx;
+  background: pink;
+}
+.ad{
+  margin-top: 20rpx;
+}
+.helpvideo{
+  width: 710rpx
 }

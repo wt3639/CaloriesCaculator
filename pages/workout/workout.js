@@ -1,4 +1,42 @@
 const app = getApp();
+ //没有存储数据时的例子
+var examplePlanList = [
+  {
+    planName: "腿部训练计划",
+    actionList: [
+      {
+      actionName: "杠铃深蹲",
+      actionRepeat: 10,
+      actionWeight: 50,
+      actionSet: 5
+    },
+    {
+      actionName:"哑铃箭步蹲",
+      actionRepeat: 10,
+      actionWeight: 20,
+      actionSet:3
+    },
+    {
+      actionName:"器械腿推",
+      actionRepeat: 10,
+      actionWeight:50,
+      actionSet: 4
+    },
+    {
+      actionName:"坐姿腿屈伸",
+      actionRepeat:15,
+      actionWeight: 20,
+      actionSet: 3
+    },
+    {
+      actionName:"卧姿腿弯举",
+      actionRepeat:15,
+      actionWeight:20,
+      actionSet:3
+    }]
+  }
+  
+]
 Page({
 
   /**
@@ -12,7 +50,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    wx.request({
+      url: 'https://www.tomwoo.tk/CounterWebApp/calory/getplanlist',
+      data: {
+        openid: app.globalData.openid,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success:function(res){
+        wx.setStorageSync("planList", res.data.planlist)
+      }
+    })
   },
 
   /**
@@ -26,7 +75,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var pl = wx.getStorageSync("planList") || []
+    var pl = wx.getStorageSync("planList") 
+     if(!pl){
+       wx.setStorageSync("planList", examplePlanList);
+       pl = examplePlanList;
+    }
     this.setData({
       planList: pl,
     })

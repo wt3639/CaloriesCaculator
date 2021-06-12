@@ -1,5 +1,6 @@
 //result.js
 const app = getApp()
+let interstitialAd = null
 var lineChart = null;
 var startPos = null;
 var userHistory = null;
@@ -16,7 +17,7 @@ var BMI = null
 var heightTemp = null
 var weightTemp = null
 var userInfo = {}
-var adStr = '腹愁者蛋白棒3盒全口味\n 代餐能量棒 包邮\n【在售价】239.90元\n【券后价】224.90元\n-----------------\n点击下方复制这条信息，￥nqf00LfTL23￥ ，打开【手机淘宝】即可领取超值优惠券'
+//var adStr = '腹愁者蛋白棒3盒全口味\n 代餐能量棒 包邮\n【在售价】239.90元\n【券后价】224.90元\n-----------------\n点击下方复制这条信息，￥nqf00LfTL23￥ ，打开【手机淘宝】即可领取超值优惠券'
 
 Page({
   data: {
@@ -31,11 +32,15 @@ Page({
     height: '',
     weight: '',
     BMI: '',
+    loginHide:false
   },
 
   onLoad: function (options) {
   
     if (app.globalData.userInfo) {
+      this.setData({
+        loginHide: true
+      })
       this.setData({
         userInfo: app.globalData.userInfo,
       })
@@ -44,13 +49,17 @@ Page({
     } else {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
+      this.setData({
+        loginHide: false
+      })
+      /*
       app.userInfoReadyCallback = res => {
         this.setData({
           userInfo: res.userInfo,
         })
         userInfo = res.userInfo;
         console.log(userInfo);
-      }
+      }*/
     }
     // 页面初始化 options为页面跳转所带来的参数 
     var si
@@ -123,8 +132,17 @@ Page({
     context.fill()
     context.draw()
 
-
+    // 在页面onLoad回调事件中创建插屏广告实例
+    if (wx.createInterstitialAd) {
+      interstitialAd = wx.createInterstitialAd({
+        adUnitId: 'adunit-fc5a215752d1c879'
+      })
+      interstitialAd.onLoad(() => { })
+      interstitialAd.onError((err) => { })
+      interstitialAd.onClose(() => { })
+    }
   },//end onload
+
   hidePrivate: function (e) {
     console.log('switch1 发生 change 事件，携带值为', e.detail.value)
     if (e.detail.value == true) {
@@ -145,37 +163,11 @@ Page({
 
   },
 
-bindAdWindow:function(){
-  var saveAdText = wx.getStorageSync('adText')
-  if(saveAdText){
-    adStr = saveAdText;
-  }
-  var editStr = adStr.replace(/\s+/g, "\n")
-  wx.showModal({
-    title: '福利',
-    content: editStr,
-    showCancel: false,
-    confirmText:'复制信息',
-    success: function (res) {
-      if (res.confirm) {
-        console.log('用户点击确定')
-        wx.setClipboardData({
-          data: adStr,
-          success: function (res) {
-            wx.getClipboardData({
-              success: function (res) {
-                console.log(res.data) // data
-              }
-            })
-          }
-        })
-      } else if (res.cancel) {
-        console.log('用户点击取消')
-      }
-    }
-  })
-},
-
+  redictToHistory:function(e){
+    wx.navigateTo({
+      url: '../line/index',
+    })
+  },
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
@@ -207,6 +199,24 @@ bindAdWindow:function(){
       }
     });
   },
+  support: function (res) {
+    wx.previewImage({
+      current: '', // 当前显示图片的http链接
+      urls: ['cloud://calories-webtest-efd9c7.6361-calories-webtest-efd9c7-1254249941/WeChat Image_20200206210320.jpg'] // 需要预览的图片http链接列表
+    })
+    /*
+    wx.navigateToMiniProgram({
+      appId: 'wx18a2ac992306a5a4',
+      path: 'pages/apps/largess/detail?id=IVgrBWKrnrY%3D',
+      extraData: {
+        foo: 'bar'
+      },
+      envVersion: 'release',
+      success(res) {
+        // 打开成功
+      }
+    })*/
+  },
   createSimulationData: function () {
     var categories = [];
     var data = [];
@@ -223,6 +233,62 @@ bindAdWindow:function(){
   onShow: function (e) {
   },
 
+  onGotUserInfo: function (e) {
+    if(e.detail.errMsg){
+      this.setData({
+        loginHide: false
+      })
+    }
+    if (e.detail.userInfo){
+      this.setData({
+        loginHide: true
+      })
+      this.setData({
+        userInfo: e.detail.userInfo,
+      })
+      app.globalData.userInfo = e.detail.userInfo
+      wx.setStorageSync("userinfo", e.detail.userInfo)
+
+      wx.cloud.callFunction({
+        name: 'getuserinfo',
+        complete: res => {
+          console.log('callFunction test result: ', res)
+          app.globalData.openid = res.result.openid
+          wx.setStorageSync('userid', res.result.openid)
+        }
+      })
+    }
+  },
  
 })
-
+/*
+bindAdWindow: function() {
+  var saveAdText = wx.getStorageSync('adText')
+  if (saveAdText) {
+    adStr = saveAdText;
+  }
+  var editStr = adStr.replace(/\s+/g, "\n")
+  wx.showModal({
+    title: '福利',
+    content: editStr,
+    showCancel: false,
+    confirmText: '复制信息',
+    success: function (res) {
+      if (res.confirm) {
+        console.log('用户点击确定')
+        wx.setClipboardData({
+          data: adStr,
+          success: function (res) {
+            wx.getClipboardData({
+              success: function (res) {
+                console.log(res.data) // data
+              }
+            })
+          }
+        })
+      } else if (res.cancel) {
+        console.log('用户点击取消')
+      }
+    }
+  })
+},*/

@@ -9,7 +9,7 @@
     <scroll-view scoll-y="true">
       <view class="widget" wx:for="{{actionList}}">
         <view class='row'>
-          <view class="column">{{item.name}}</view>
+          <view class="column">{{item.actionName}}</view>
 
           <view class="editIcon">
             <view class="editIcon" bindtap='editAction' data-index="{{index}}">
@@ -23,9 +23,9 @@
           </view>
         </view>
         <view class='row'>
-          <text class="column">每组次数:{{item.repeats}}</text>
-          <text class="column">重量:{{item.weight}}kg</text>
-          <text class="column">组数:{{item.sets}}</text>
+          <text class="column">每组次数:{{item.actionRepeat}}</text>
+          <text class="column">重量:{{item.actionWeight}}kg</text>
+          <text class="column">组数:{{item.actionSet}}</text>
         </view>
 
       </view>
@@ -35,6 +35,7 @@
     </view>
     <button class='button' form-type="submit" type="primary">保存</button>
   </form>
+  <ad unit-id="adunit-ee110f385e618271"></ad>
 </view>
 
 <modal hidden="{{hiddenmodalput}}" title="请输入动作" confirm-text="取消" no-cancel="true" bindconfirm="actionConfirm">
