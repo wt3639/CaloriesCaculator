@@ -1,22 +1,27 @@
 <view class="container">
   <view class='head'>
     <view class='row'>
+    <view>
       <view class="editIcon" bindtap="checkHis">
         <image class="icon" src="/images/backup.png"></image>
         <view class='editText'>历史</view>
       </view>
+    </view>
       <view>训练计划</view>
+      <view>
       <view class="editIcon" bindtap="addPlan">
         <image class="icon" src="/images/add.png"></image>
         <view class='editText'>新增</view>
       </view>
+      </view>
+      
     </view>
   </view>
   <scroll-view scoll-y="true">
     <view class="widget" wx:for="{{planList}}">
       <view class="row">
         <view class="left">
-          <view class='column'>{{item.name}}</view>
+          <view class='column'>{{item.planName}}</view>
           <view class="edit">
             <view class='row'>
               <navigator class="editIcon" url="../operation/operation?actionId={{index}}">
@@ -39,4 +44,5 @@
       </view>
     </view>
   </scroll-view>
+  <ad unit-id="adunit-ee110f385e618271"></ad>
 </view>

@@ -12,6 +12,10 @@ var timer
 var actLineArray = []
 const reas = []
 const weis = []
+var actionHistory = {
+  name: null,
+  done: [],
+};
 
 for (let i = 0; i <= 30; i++) {
   reas.push(i)
@@ -20,8 +24,10 @@ for (let i = 0; i <= 30; i++) {
 for (let i = 0; i <= 300; i += 2.5) {
   weis.push(i)
 }
-
+var worker=null;
 var startTime;
+var countStartTime;
+var vibrateTimer;
 
 Page({
 
@@ -43,6 +49,8 @@ Page({
     reas: reas,
     weis: weis,
     value: [1, 1],
+    planHide:false,
+    beginPlanBtnHide:false,
   },
 
   bindChange: function (e) {
@@ -71,19 +79,19 @@ Page({
         hide: false,
         color:"black"
       }
-      actLine.name = planList.actionList[i].name;
-      actLine.repeats = planList.actionList[i].repeats;
-      actLine.sets = planList.actionList[i].sets;
-      actLine.weight = planList.actionList[i].weight;
+      actLine.name = planList.actionList[i].actionName;
+      actLine.repeats = planList.actionList[i].actionRepeat;
+      actLine.sets = planList.actionList[i].actionSet;
+      actLine.weight = planList.actionList[i].actionWeight;
       actLineArray.push(actLine)
     }
     console.log(actLineArray)
     this.setData({
       actionList: actLineArray,
-      planName: planList.name,
+      planName: planList.planName,
     })
     sportHis.date = new Date().toLocaleString();
-    sportHis.planName = planList.name;
+    sportHis.planName = planList.planName;
     startTime= new Date().getTime();
   },
 
@@ -105,14 +113,18 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    //Countdown(this);
+   // var that = this;
+    //Countdown(that)
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    if (worker) {
+      worker.terminate();
+    }
   },
 
   /**
@@ -146,22 +158,16 @@ Page({
   },
 
   formSubmit: function (e) {
-    clearTimeout(timer);
+    //worker.terminate()
     console.log(e)
-    var actionHistory = {
-      name: null,
+    var setNum = this.data.setnum;
+    var doneSet = {
       repeats: null,
       weight: null,
-      setnum: null,
-    };
-    var setNum = this.data.setnum
-    actionHistory.name = this.data.actionName;
-    actionHistory.repeats = this.data.repeats
-    actionHistory.weight = this.data.weight;
-    actionHistory.setnum = this.data.setnum;
-    actHisList.push(actionHistory)
-    console.log(setNum);
-    console.log(this.data.sets);
+    }
+    doneSet.repeats = this.data.repeats
+    doneSet.weight = this.data.weight;
+    actionHistory.done.push(doneSet);
     if(setNum>=this.data.sets){
       this.setData({
         completePlanHide:false,
@@ -178,34 +184,43 @@ Page({
       formHide: true,
       count: 0
     })
-    clearTimeout(timer);
-    Countdown(this);
+    if(worker){
+      worker.terminate();
+    }
+    countStartTime = new Date().getTime();
+    var that =this;
+    timer = setInterval(function () {
+      Countdown(that);
+    }, 1000);
+    //Countdown(this);
+    // vibrateCountdown(this);
+    // worker = wx.createWorker('workers/request/index.js') // 文件名指定 worker 的入口文件路径，绝对路径
+    // worker.postMessage({
+    //   obj: this
+    // })
+    // var that = this;
+    // worker.onMessage(function (res) {
+    //   var count = res.back;
+    //   if (count % 60 == 0 && count != 0) {
+    //     wx.vibrateLong({
+    //       success: console.log("vibrate")
+    //     })
+    //   }
+    //   that.setData({
+    //     count: count
+    //   });
+    // })
   },
 
   restComplete: function () {
     this.setData({
       formHide: false,
     })
+    // worker.terminate()
     clearTimeout(timer);
   },
 
-  completePlan: function () {
-    sportHis.complete = actHisList;
-    var SumTime = new Date().getTime()-startTime;
-    sportHis.sumTime = SumTime;
-    var SumHour = parseInt(SumTime / 3600000);
-    var SumMin = parseInt(SumTime%3600000/60000);
-    var SumSec = Math.round(SumTime%60000/1000);
-    var sumTimeStr = SumHour + "时" + SumMin + "分" + SumSec + "秒";
-    console.log(sumTimeStr);
-    var sportHisList = wx.getStorageSync("sportHistory") || [];
-    sportHisList.push(sportHis);
-    wx.setStorageSync("sportHistory", sportHisList)
-    let hisStr = JSON.stringify(sportHis.complete)
-    wx.redirectTo({
-      url: '../workresult/workresult?date=' + sportHis.date + "&planName=" + sportHis.planName + "&complete=" + hisStr+"&sumTime="+SumTime,
-    })
-  },
+  
   actionCancel: function () {
     this.setData({
       hiddenmodalput: true,
@@ -216,6 +231,7 @@ Page({
       count: 0,
       formHide: false,
     })
+    // worker.terminate()
     clearTimeout(timer);
   },
 
@@ -228,7 +244,10 @@ Page({
       actionList: tempActionList,
       formHide: false,
     })
-    console.log(this.data.actionList)
+    console.log(actionHistory)
+    actHisList.push(actionHistory);
+    console.log(actHisList)
+    // worker.terminate()
     clearTimeout(timer);
   },
 
@@ -238,6 +257,11 @@ Page({
     if (action.hide != true) {
       console.log(e);
       actionIndex = e.currentTarget.dataset.index
+      actionHistory = {
+        name: null,
+        done: [],
+      };
+      actionHistory.name = action.name;
       this.setData({
         completePlanHide: true,
         hiddenmodalput: false,
@@ -248,25 +272,81 @@ Page({
         setnum: 1,
         value: [action.repeats, action.weight / 2.5]
       })
+      console.log(actionHistory)
     }
 
-  }
+  },
+  beginPlan(e) {
+    var actionList = this.data.actionList;
+    if(actionList!=null){
+      var action = actionList[0]
+      if (action.hide != true) {
+        console.log(e);
+        actionIndex = 0
+        actionHistory = {
+          name: null,
+          done: [],
+        };
+        actionHistory.name = action.name;
+        this.setData({
+          completePlanHide: true,
+          hiddenmodalput: false,
+          actionName: action.name,
+          repeats: action.repeats,
+          weight: action.weight,
+          sets: action.sets,
+          setnum: 1,
+          value: [action.repeats, action.weight / 2.5],
+          beginPlanBtnHide: true,
+        })
+        console.log(actionHistory)
+
+      }
+    }
+    
+
+  },
+  completePlan: function () {
+    sportHis.complete = actHisList;
+    var SumTime = new Date().getTime() - startTime;
+    sportHis.sumTime = SumTime;
+    var SumHour = parseInt(SumTime / 3600000);
+    var SumMin = parseInt(SumTime % 3600000 / 60000);
+    var SumSec = Math.round(SumTime % 60000 / 1000);
+    var sumTimeStr = SumHour + "时" + SumMin + "分" + SumSec + "秒";
+    console.log(sumTimeStr);
+    var sportHisList = wx.getStorageSync("sportHistory") || [];
+    sportHisList.push(sportHis);
+    wx.setStorageSync("sportHistory", sportHisList)
+    let hisStr = JSON.stringify(sportHis.complete)
+    wx.redirectTo({
+      url: '../workresult/workresult?date=' + sportHis.date + "&planName=" + sportHis.planName + "&complete=" + hisStr + "&sumTime=" + SumTime,
+    })
+  },
 
 })
 
 function Countdown(that) {
-  var count = that.data.count;
+  var count = parseInt((new Date().getTime() - countStartTime)/1000);
   if (count % 60 == 0 && count != 0) {
     wx.vibrateLong({
       success: console.log("vibrate")
     })
   }
   console.log(count);
+  that.setData({
+    count: count
+  });
   count++;
-  timer = setTimeout(function () {
-    that.setData({
-      count: count
-    });
-    Countdown(that);
-  }, 1000);
+
 };
+
+// function vibrateCountdown(that) {
+//   wx.vibrateLong({
+//     success: console.log("vibrate")
+//   })
+//   vibrateTimer = setTimeout(function () {
+//     vibrateCountdown(that);
+//   }, 60000);
+ 
+// };

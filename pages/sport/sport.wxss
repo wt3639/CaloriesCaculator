@@ -41,7 +41,7 @@
 }
 .countdown{
   text-align: center;
-  font-size: 5rem;
+  font-size: 10rem;
 }
 
 .head{
@@ -88,9 +88,16 @@
   width: 50%;
   text-align: center;
 }
-.bottomFix{
+
+.headRow{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   position: fixed;
   bottom: 0;
   width: 100%;
   background: white;
+}
+.bottomButton{
+  width: 50%
 }

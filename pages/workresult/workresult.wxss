@@ -31,6 +31,7 @@
 
 .head{
     padding-left: 20rpx;
+    margin-bottom: 20rpx;
 }
 .mainView{
   margin: 20rpx;
@@ -57,7 +58,7 @@
   padding-right: 5rpx;
 }
 .column{
-  width:180rpx;
+  width:220rpx;
   display: table-cell;
   text-align: center
 }
@@ -67,9 +68,10 @@
   text-align: center
 }
 .longColumn{
-  width:280rpx;
   display: table-cell;
-  text-align: center
+  padding-left: 20rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
 }
 
 .modalView{
@@ -78,4 +80,13 @@
 
 .imageView{
  width: 100%;
+}
+
+.table{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  text-align: center;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
 }

@@ -14,6 +14,14 @@
   margin-top: 10rpx;
 }
 
+.pinkbutton{
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  background: pink;
+}
+
 .userinfo {
   display: flex;
   flex-direction: column;
@@ -49,9 +57,9 @@
 }
 
 .button {
-  margin-top: 40rpx;
-  margin-left: 60rpx;
-  margin-right: 60rpx;
+  margin-top: 20rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
 }
 
 .number {

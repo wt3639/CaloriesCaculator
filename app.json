@@ -33,13 +33,12 @@
         "iconPath": "images/work_gray.png",
         "pagePath": "pages/workout/workout",
         "text": "训练计划"
-      },
-      {
-        "selectedIconPath": "images/user.png",
-        "iconPath": "images/user_gray.png",
-        "pagePath": "pages/user/user",
-        "text": "我"
       }
     ]
-  }
+  },
+  "workers": "workers",
+  "navigateToMiniProgramAppIdList": [
+    "wx18a2ac992306a5a4"
+  ],
+  "sitemapLocation": "sitemap.json"
 }

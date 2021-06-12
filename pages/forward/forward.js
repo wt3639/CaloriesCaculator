@@ -75,9 +75,10 @@ Page({
   },
 
 getMy: function (e){
-  wx.navigateTo({
+  wx.reLaunch({
     url: '../index/index'
   })
+  //console.log("getMy")
 },
 
 

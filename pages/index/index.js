@@ -1,6 +1,11 @@
 //index.js
 //获取应用实例
 var app = getApp()
+// 在页面中定义插屏广告
+let interstitialAd = null
+const db = wx.cloud.database({
+  env: 'calories-webtest-efd9c7'
+})
 var userInfo = {}
 Page({
   data: {
@@ -43,9 +48,13 @@ Page({
     age: '',
     aerobic: '',
     energy: '300',
-    advice: '建议:200~500'
+    advice: '建议:200~500',
+    saveWeightChecked:false,
+    helpHidden:true,
+    opencloseHelp:'使用教程'
   },
 
+//热量过剩 缺口栏目帮助按钮
   bindHelp: function () {
     wx.showModal({
       title: '提示',
@@ -60,6 +69,8 @@ Page({
       }
     })
   },
+
+  //运动频次 帮助
   bindSportHelp: function () {
     wx.showModal({
       title: '提示',
@@ -74,6 +85,8 @@ Page({
       }
     })
   },
+
+  //有氧运动帮助
   bindAerobicHelp: function () {
     wx.showModal({
       title: '提示',
@@ -89,6 +102,7 @@ Page({
     })
   },
 
+//目的 帮助
   bindGoalHelp: function () {
     wx.showModal({
       title: '提示',
@@ -103,7 +117,7 @@ Page({
       }
     })
   },
-
+//蛋白质变化事件响应
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
@@ -111,7 +125,14 @@ Page({
     })
   },
 
+//目的 改变事件 响应
   goalChange: function (e) {
+    // 在适合的场景显示插屏广告
+    if (interstitialAd) {
+      interstitialAd.show().catch((err) => {
+        console.error(err)
+      })
+    }
     console.log('radio发送选择改变，携带值为', e.detail.value)
     if (e.detail.value == 'muscle') {
       this.setData({
@@ -143,6 +164,7 @@ Page({
    
     },
 
+//查看结果按钮响应
   formSubmit: function (e) {
     if (e.detail.value.height.length == 0 || e.detail.value.height < 0
       || e.detail.value.weight.length == 0 || e.detail.value.weight < 0
@@ -174,27 +196,52 @@ Page({
         case '4': si = 1.9; break
       }
       console.log(app.openid)
-      wx.request({
-        url: 'https://www.tomwoo.tk/CounterWebApp/calory/getjson',
-        data: {
-          openid: app.globalData.openid,
-          nickname: app.globalData.userInfo.nickName,
-          height: e.detail.value.height,
-          weight: e.detail.value.weight,
-          age: e.detail.value.age,
-          aerobic: e.detail.value.aerobic,
-          energy: e.detail.value.energy,
-          sex: e.detail.value.sex,
-          goals: e.detail.value.goal,
-          sportindex: si,
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          console.log(res.data)
-        }
-      })
+      if(this.data.saveWeightChecked==true){
+        db.collection('userinfo').add({
+          // data 字段表示需新增的 JSON 数据
+          data: {
+              openid: null,
+              nickname: null,
+              height: e.detail.value.height,
+              weight: e.detail.value.weight,
+              age: e.detail.value.age,
+              aerobic: e.detail.value.aerobic,
+              energy: e.detail.value.energy,
+              sex: e.detail.value.sex,
+              goals: e.detail.value.goal,
+              sportIndex: si,
+            create_date: db.serverDate()
+          },
+          success: function (res) {
+            // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
+            console.log(res)
+          }
+        })
+        /*
+        wx.request({
+          url: 'https://www.tomwoo.tk/CounterWebApp/calory/getjson',
+          method:'POST',
+          data: {
+            openid: app.globalData.openid,
+            nickname: app.globalData.userInfo.nickName,
+            height: e.detail.value.height,
+            weight: e.detail.value.weight,
+            age: e.detail.value.age,
+            aerobic: e.detail.value.aerobic,
+            energy: e.detail.value.energy,
+            sex: e.detail.value.sex,
+            goals: e.detail.value.goal,
+            sportIndex: si,
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          success: function (res) {
+            console.log(res.data)
+          }
+        })*/
+      }
+     
       
       wx.navigateTo({
         url: '../result/result?height=' + e.detail.value.height + '&weight=' + e.detail.value.weight + '&age=' + e.detail.value.age + '&aerobic=' + e.detail.value.aerobic + '&energy=' + e.detail.value.energy
@@ -269,11 +316,62 @@ Page({
     } catch (e) {
       // Do something when catch error
     }
+    // 在页面onLoad回调事件中创建插屏广告实例
+    if (wx.createInterstitialAd) {
+      interstitialAd = wx.createInterstitialAd({
+        adUnitId: 'adunit-fc5a215752d1c879'
+      })
+      interstitialAd.onLoad(() => { })
+      interstitialAd.onError((err) => { })
+      interstitialAd.onClose(() => { })
+    }
+
    
     console.log('onLoad')
   },
 
+  onReady(res) {
+    this.videoContext = wx.createVideoContext("helpvideo1")
+    wx.preloadVideoAd("adunit-ec4e57a27f82b0b9")
+  },
 
+//勾选记录身体数据 响应函数
+  saveWeight: function (e) {
+    console.log('switch1 发生 change 事件，携带值为', e.detail.value)
+    if (e.detail.value == true) {
+      this.setData({
+        saveWeightChecked :true
+      })
+    } else {
+      this.setData({
+        saveWeightChecked : false
+      })
+    }
+
+  },
+
+//打赏按钮 响应函数
+  support:function(res){
+    wx.previewImage({
+      current: '', // 当前显示图片的http链接
+      urls: ['cloud://calories-webtest-efd9c7.6361-calories-webtest-efd9c7-1254249941/WeChat Image_20200206210320.jpg'] // 需要预览的图片http链接列表
+    })
+    /*
+    wx.navigateToMiniProgram({
+      appId: 'wx18a2ac992306a5a4',
+      path: 'pages/apps/largess/detail?id=IVgrBWKrnrY%3D',
+      extraData: {
+        foo: 'bar'
+      },
+      envVersion: 'develop',
+      success(res) {
+        // 打开成功
+        console.log("打开有赞")
+      }
+    })*/
+  },
+  
+  //右上角 转发事件响应函数
   onShareAppMessage: function (res) {
     if (res.from === 'menu') {
       // 来自页面内转发按钮
@@ -290,4 +388,24 @@ Page({
       }
     }
   },
+
+  //教程视频隐藏显示按钮响应函数
+  helpVideo:function(e){
+    if(this.data.helpHidden == true){
+      this.setData({
+        helpHidden: false,
+        opencloseHelp: '关闭教程'
+      })
+    }else{
+      this.setData({
+        helpHidden: true,
+        opencloseHelp: '使用教程'
+      })
+    }
+    
+  }
 })
+
+
+
+

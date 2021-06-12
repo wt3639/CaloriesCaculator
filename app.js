@@ -1,4 +1,5 @@
 //app.js
+
 App({
   globalData: {
     userInfo: null,
@@ -8,12 +9,19 @@ App({
     userHistory:null,
   },
   onLaunch: function () {
+    wx.cloud.init({
+      env: 'calories-webapp-cb8323'
+    })
+    wx.setKeepScreenOn({
+      keepScreenOn: true
+    })
     var that = this
     // 登录
     var uid = wx.getStorageSync('userid')
     if (uid) {
       that.globalData.openid = uid;
     } else {
+      /*
       wx.login({
         success: res => {
           wx.request({
@@ -34,10 +42,12 @@ App({
             }
           })
         }
-      })
+      })*/
     }
     var userinfo = wx.getStorageSync("userinfo")
+    
     if (!userinfo) {
+      /*
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -62,11 +72,11 @@ App({
           }
         })
       }
-    })
+    })*/
     }else{
       that.globalData.userInfo = userinfo;
     }
-
+/*
     wx.request({
       url: 'https://www.tomwoo.tk/CounterWebApp/calory/getAd',
       data: {
@@ -83,7 +93,7 @@ App({
       }
     })
 
-  
+  */
 
     var res = wx.getSystemInfoSync();
     this.globalData.sysInfo = res;
